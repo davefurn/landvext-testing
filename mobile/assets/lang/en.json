@@ -1,0 +1,146 @@
+{
+    "onboarding": {
+      "text_onboarding_page_one": "Save for your rent",
+      "text_onboarding_page_two": "Invest in real estate",
+      "text_onboarding_page_three": "Buy land at incredible prices",
+      "text_onboarding_page_description_one": "We've made it our mission to simplify your journey to stress-free rent payments.",
+      "text_onboarding_page_description_two": "Start investing in properties that promise lasting value.",
+      "text_onboarding_page_description_three": "We're here to make land ownership a reality for all, with unbeatable deals that fit any budget.",
+     
+      "text_onboarding_page_space": "   ",
+      "text_onboarding_page_skip": "Skip",
+      "text_onboarding_page_getstarted": "Get Started",
+      "text_onboarding_page_next": "Next"
+    },
+    "authentication": {
+      "signup_description_personal": "Lets know you.",
+      "quick_login_title": "Create a 4-digit pin",
+      "quick_login_description": "You will use this pin to log into the application subsequently",
+      "signup_title_personal": "Personal Details",
+      "signup_personal_textfield_first_name": "First Name",
+      "signup_title": "Create account",
+      "signup_next": "Next",
+      "signup_personal_textfield_last_name": "Last Name",
+      "signup_personal_textfield_validator": "Please enter valid name",
+      "signup_description": "You need an account to book real estate",
+      "signup_textfield_email": "Email",
+      "signup_textfield_phone_number": "Phone Number",
+      "signup_textfield_password": "Password",
+      "signup_textfield_have_account": "Have an account? ",
+      "signup_textfield_have_account_main_text": "Login",
+      "signup_successful": "Successful!",
+      "signup_successful_little_text": "You can now begin saving up for your next rent",
+      "signup_textfield_phone_validation_phone": "Please enter your phone number",
+      "signup_textfield_phone_validation_phone_valid": "Please enter valid phone number",
+      "email_validation_title": "Check your email",
+      "email_validation_description": "We’ve sent the code to the email on your device",
+      "email_validation_timer": "Code expires in: ",
+      "email_validation_recieve_code": "Didn’t receive code? ",
+      "email_validation_recieve_code_resend": "Resend Code",
+      "email_validation_button_title": "Proceed",
+      "login_title": "Log In",
+      "login_description": "You need an account to book real estate",
+      "login_textfield_email": "Email",
+      "login_textfield_password": "Password",
+      "login_textfield_have_account": "Don't have an account? ",
+      "login_textfield_have_account_main_text": "Signup",
+      "login_textfield_forgot_password": "Forgot Password?",
+      "login_textfield_email_validation": "Please enter a valid email",
+      "login_textfield_password_validation_character_size": "Password has to be 8 characters or more",
+      "login_textfield_password_validation_cases": "Password has to contain Uppercase and Lowercase letters",
+      "forgot_password_title": "Create a new password",
+      "sent_email_title": "Email Verification",
+      "forgot_password_description": "Update your password, fill the form.",
+      "forgot_password_textfield_password": "New Password",
+      "forgot_password_textfield_confirm_password": "Confirm Password",
+      "forgot_password_custom_button": "Update Password",
+    
+      "sent_email_description": "Please enter the email address you used when registering for our mobile app. We'll send you a link to verify your email",
+      "sent_email_endpoint": "Password reset token successfully sent",
+      "sent_email_hint": "Email",
+      "sent_email_button": "Send",
+      "sent_email_recieve_code": "Didn’t receive email? ",
+      "sent_email_recieve_code_resend": "Resend Email",
+      "snackbar_unknown_error": "Unknown error"
+    
+    },
+    "snackbar": {
+      "code_502": "Server Error, Bad Gateway",
+      "code_unknown": "Something went wrong",
+      "code_null": "Unknown error occurred",
+      "code_null_internet": "Something went wrong, Check your internet connection",
+      "code_200": "Successful"
+    },
+    "home": {
+      "home_title": "Home",
+      "dashboard_investment": "Total Investment",
+      "dashboard_promo": "Up to 13% returns",
+      "dashboard_subText_title_main": "Withdrawal Date",
+      "dashboard_subTextTitle": "Daily Savings Target",
+      "transactions": "Transaction History"
+    },
+    "profile": {
+      "profile_title": "Settings",
+      "update_profile": "Account",
+      "profile_text_personal": "My Profile",
+      "profile_text_address": "My Address",
+      "profile_text_password": "Change Password",
+      "profile_text_settings": "Account Settings",
+      "profile_text_other": "Other",
+      "profile_text_about": "About Verified Owners",
+      "profile_text_policy": "Privacy Policy",
+      "profile_text_contact": "Contact Us",
+      "profile_text_version": "Get The Latest Version",
+      "profile_text_log_out": "Log Out",
+      "profile_personal_textfield_full_name": "Full Name",
+      "profile_personal_textfield_full_name_hint": "Enter Name",
+      "profile_textfield_phone_number_hint": "Enter Phone Number",
+      "profile_textfield_phone_number": "Phone Number",
+      "profile_personal_textfield_location": "Location Detail",
+      "profile_personal_textfield_location_hint": "Enter Location Detail",
+      "profile_personal_textfield_change_password": "Change Password",
+      "profile_personal_textfield_current_password": "Current Password",
+      "profile_personal_textfield_current_password_hint": "Enter current password",
+      "profile_personal_textfield_new_password": "New password",
+      "profile_personal_textfield_new_password_hint": "Enter new Password",
+      "profile_personal_textfield_re_enter_password": "Re-Enter Password",
+      "profile_personal_textfield_re_enter_password_hint": "Re-Enter Password",
+      "profile_personal_textfield_update_password": "Update Password",
+      "profile_text_share": "Share"
+    },
+    "currency": {
+      "currency": "NGN"
+    },
+    "invest": {
+      "invest_title": "Properties",
+      "all_invest": "All Investment",
+      "dashboard_investment": "Total Investment",
+      "invest_deals": "Investment Deals",
+      "all_invest_deals": "All Investment Deals",
+      "investment_all": "View All Investment",
+      "dashboard_promo": "Up to 13% returns",
+      "invest_tab_active": "Active",
+      "invest_tab_matured": "Matured"
+    },
+    "savings": {
+      "savings_title": "Savings",
+      "dashboard_investment": "Total Investment",
+      "dashboard_promo": "Up to 13% returns",
+      "dashboard_subText_title_main": "Withdrawal Date",
+      "button_one": "Deposit",
+      "button_two": "Withdraw",
+      "dashboard_subTextTitle": "Reason for Saving"
+    },
+    "label": {
+      "app_title": "Landvext",
+      "bottom_nav_one": "Home",
+      "bottom_nav_two": "Savings",
+      "bottom_nav_three": "Invest",
+      "bottom_nav_four": "Profile"
+
+    },
+    "core": {
+      "activity_timer": "Logged out due to inactivity"
+    }
+
+  }

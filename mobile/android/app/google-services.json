@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "861685885976",
+    "project_id": "landvext-ef978",
+    "storage_bucket": "landvext-ef978.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861685885976:android:b59d8f4f388c018304a76d",
+        "android_client_info": {
+          "package_name": "com.example.landvext"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7BH_KsaH8XnMoRBafPci1Pa8ZA7CoYiI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

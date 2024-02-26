@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+
+    image: landvest_production_app
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start

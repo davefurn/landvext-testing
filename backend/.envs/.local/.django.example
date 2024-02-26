@@ -1,0 +1,27 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+
+# authentication
+USERNAME_FIELD=email
+DJANGO_SECRET_KEY=None
+
+# Email
+# ------------------------------------------------------------------------------
+DEFAULT_FROM_EMAIL=user@domain.x
+DJANGO_SERVER_EMAIL=user@domain.x
+DJANGO_SERVER_EMAIL_PASSWORD=password
+DJANGO_SERVER_EMAIL_HOST=host.domain.x
+DJANGO_SERVER_EMAIL_PORT=000
+SMTP=True
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+
+# AWS
+# ------------------------------------------------------------------------------
+DJANGO_AWS_ACCESS_KEY_ID=None
+DJANGO_AWS_SECRET_ACCESS_KEY=None
+DJANGO_AWS_STORAGE_BUCKET_NAME=None
+
+
+DATABASE_URL=None

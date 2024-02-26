@@ -1,0 +1,58 @@
+Effective Date: February 1, 2024
+The Landvext App (hereinafter referred to as "the App") is committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, store, share, and protect your data when you use our mobile application. We are governed by the National Information Technology Development Agency (NITDA) and comply with the Nigeria Data Protection Regulation (2019) and other relevant Nigerian laws and regulations.
+	1	Your Privacy Rights We respect your privacy rights and strive to protect your personal information. This Privacy Policy applies to the App, including our administrative records, websites, social media platforms, and premises. By using the App and its services, you consent to the terms of this Privacy Policy.
+	2	Consent By accessing our platforms, using our services, or visiting our offices, you provide your consent to the collection, use, storage, and protection of your personal information as outlined in this Privacy Policy. We may amend this Privacy Policy from time to time, and any updates will be effective after a 7-day notice period.
+	3	Personal Information We Collect We collect various types of personal information to provide efficient and secure services. The information we may collect includes:
+3.1. Personal Identifiers:
+	•	Full Name
+	•	Email Address
+	•	Mobile Number
+	•	Employee ID
+	•	Profile Picture (optional)
+3.2. Device Information:
+	•	Device Type
+	•	Device ID
+	•	Operating System
+	•	IP Address
+3.3. Usage Information:
+	•	Pages accessed
+	•	Computer IP address
+	•	Device ID or unique identifier
+	•	Device type
+	•	Geo-location information
+	•	Computer and connection information
+	•	Mobile network information
+	•	Page views and traffic statistics
+	•	Referral URL
+	•	Ad data
+	•	Standard web log data
+	•	Still and moving images
+3.4. Additional Information:
+	•	Information provided through web forms, surveys, and account updates
+	•	Correspondence with our support services
+	•	Transaction details and activities on the App
+	4	Use of Personal Information We use your personal information for the following purposes:
+4.1. Provision of Services:
+	•	To provide and support the App's functionalities and services.
+	•	To process applications and send transaction notifications.
+	•	To verify your identity and resolve disputes or issues.
+4.2. Risk Management and Security:
+	•	To detect, prevent, and remediate fraud, illegal activities, or violations of laws and regulations.
+	•	To manage and protect our information technology and physical infrastructure.
+	•	To track information breaches and take appropriate actions.
+4.3. Communication:
+	•	To contact you regarding important notifications, updates, or support.
+	•	To send relevant information and essential notices related to our services.
+4.4. Service Improvement:
+	•	To analyze user preferences and improve the App's performance, content, and layout.
+	•	To measure the effectiveness of our services and make enhancements.
+	5	Cookies We may use cookies to enhance your browsing experience. Cookies are small files placed on your computer's hard drive that allow websites to identify your computer and provide personalized content or functions. Our website uses encrypted session cookies, which are erased after a predefined timeout period or when you log out. These cookies do not collect personal information.
+	6	Data Security We implement physical, technical, and administrative security measures to protect your personal information from unauthorized access, disclosure, alteration, or loss. We store and process your data in Nigeria, and if it is transferred to another country, we ensure that it has adequate data protection laws.
+	7	Data Sharing and Disclosure We may share your personal information in the following circumstances:
+7.1. Third-Party Service Providers:
+	•	We work with trusted third-party service providers who assist us in delivering our services. These providers are obligated to maintain the confidentiality and security of your information.
+7.2. Legal Compliance:
+	•	We may disclose your information if required by law, regulations, or legal proceedings.
+	8	Links to Other Websites Our App and platforms may contain links to third-party websites. We do not monitor or control the privacy practices or content of these external sites. We encourage you to review their privacy policies before disclosing any personal information.
+	9	Data Confidentiality Rights We treat your information as confidential and do not disclose it to third parties, except as required by law or regulations. You have the right to request access to your personal information in accordance with the Freedom of Information Act and other relevant enactments.
+	10	Contact Information If you have any inquiries, requests, or concerns regarding this Privacy Policy or our data practices, please contact us at ict@anambrastate.gov.ng.

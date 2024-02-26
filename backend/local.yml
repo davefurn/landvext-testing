@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  app: &app
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: landvest_local_app
+    container_name: landvest_local_app
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - '8000:8000'
+    command: /start

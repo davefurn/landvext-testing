@@ -1,0 +1,4 @@
+backend/.envs/.local/.django
+backend/.envs/.local/.postgres
+backend/.envs/.production/.postgres
+backend/.envs/.production/.django
