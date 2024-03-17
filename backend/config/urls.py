@@ -4,15 +4,15 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from landvest.users.api.views import ObtainTokenView
+from django.conf.urls import handler400, handler403, handler404, handler500
+from config.api_router.v1.views import custom404, custom500, custom400, custom403
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # jwt-auth
-    path('auth/jwt/create/', ObtainTokenView.as_view()),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
+    path("auth/", include("djoser.urls")),
+    path("auth/", include("djoser.urls.jwt")),
     # jwt-auth
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -56,3 +56,8 @@ if settings.DEBUG:
         import debug_toolbar
 
         urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+
+handler404 = custom404
+handler500 = custom500
+handler400 = custom400
+handler403 = custom403

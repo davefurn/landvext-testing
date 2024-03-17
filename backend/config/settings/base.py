@@ -115,7 +115,9 @@ PASSWORD_HASHERS = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -257,15 +259,14 @@ LOGGING = {
 # jwt
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 SIMPLE_JWT = {
-    'AUTH_HEADER_TYPES': ('JWT',),
-    # 'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
-    'ACCESS_TOKEN_LIFETIME': timedelta(weeks=1),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+    "AUTH_HEADER_TYPES": ("JWT",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
     "BLACKLIST_AFTER_ROTATION": False,
 }
 # jwt
@@ -290,3 +291,16 @@ USERNAME_FIELD = env(
 )
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+# FLUTTERWAVE
+FLUTTERWAVE_SK = env.str("FLUTTERWAVE_SK", default="")
+FLUTTERWAVE_PK = env.str("FLUTTERWAVE_PK", default="")
+FLUTTERWAVE_SH = env.str("FLUTTERWAVE_SH", default="")
+
+
+ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CORS_ALLOWED_ORIGINS = ALLOWED_ORIGINS
+CORS_ORIGIN_WHITELIST = ALLOWED_ORIGINS

@@ -15,6 +15,7 @@ class WithDrawal extends ConsumerStatefulWidget {
 }
 
 class _WithDrawalState extends ConsumerState<WithDrawal> {
+  bool isLoading = false;
   String? selectedValue;
   String? accountName;
   String? validAccountNumber;
@@ -66,6 +67,16 @@ class _WithDrawalState extends ConsumerState<WithDrawal> {
     setState(() {
       state = LoadingState.normal;
     });
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 
   @override
@@ -292,7 +303,7 @@ class _WithDrawalState extends ConsumerState<WithDrawal> {
               onChanged: (value) async {
                 if (value.length == 10) {
                   final NetworkService network = NetworkService();
-
+                  _showLoadingDialog(context);
                   await network.postRequestHandler(
                       'v1/users/get-account-info-providus-nip/', {
                     'account_number': account.text,
@@ -313,6 +324,14 @@ class _WithDrawalState extends ConsumerState<WithDrawal> {
                       }
                     },
                   );
+
+                  if (context.mounted) {
+                    context.pop();
+                  }
+                } else {
+                  setState(() {
+                    accountName = '';
+                  });
                 }
               },
               onEditingComplete: () async {

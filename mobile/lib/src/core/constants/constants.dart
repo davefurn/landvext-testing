@@ -4,6 +4,7 @@ class LandAssets {
   static const onboardingPic3 = 'assets/images/onboarding/2.png';
 
   static const goodSvg = 'assets/svgs/green_mark.svg';
+  static const deposit = 'assets/svgs/deposit.svg';
   static const badSvg = 'assets/svgs/red_mark.svg';
   static const defaultPicture = 'assets/images/default/profile.png';
   static const defaultImage = 'assets/images/default/card.jpeg';
@@ -37,6 +38,8 @@ class LandAssets {
   static const mastercard = 'assets/images/default/mastercard.png';
   static const visa = 'assets/images/default/visa.png';
   static const providus = 'assets/images/default/providus.png';
+
+  static const informationz = 'assets/svgs/informationz.svg';
 
   static const referralHome = 'assets/svgs/referral.svg';
   static const properties = 'assets/svgs/properties.svg';

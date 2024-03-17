@@ -17,8 +17,8 @@ class QuickLinksTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             QuickLinks(
-              color: LandColors.quickLinksBlue,
-              icon: LandAssets.properties,
+              color: LandColors.quickLinksGreen,
+              icon: LandAssets.deposit,
               text: 'Deposit',
               onTap: () {
                 context.pushNamed(
@@ -40,18 +40,20 @@ class QuickLinksTab extends StatelessWidget {
               },
             ),
             QuickLinks(
-              color: LandColors.quickLinksGreen,
-              icon: LandAssets.history,
-              text: 'History',
+              color: LandColors.quickLinksBlue,
+              icon: LandAssets.properties,
+              text: 'Properties',
               onTap: () {
-                context.pushNamed(AppRoutes.history.name);
+                context.pushNamed(AppRoutes.myProperties.name);
+                // context.pushNamed(
+                //   AppRoutes.properties.name,
+                // );
               },
             ),
           ],
         ),
       );
 }
-
 
 class Textss extends StatelessWidget {
   const Textss({
@@ -60,16 +62,16 @@ class Textss extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 20.w,
-      ),
-      child: Text(
-        'Real Estate Portfolio',
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w600,
-          color: LandColors.textColorVeryBlack,
+        padding: EdgeInsets.symmetric(
+          horizontal: 20.w,
         ),
-      ),
-    );
+        child: Text(
+          'Real Estate Portfolio',
+          style: TextStyle(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
+            color: LandColors.textColorVeryBlack,
+          ),
+        ),
+      );
 }

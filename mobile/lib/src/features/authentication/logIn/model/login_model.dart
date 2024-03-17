@@ -25,12 +25,12 @@ class LoginData {
     required this.currentBalance,
     required this.referralPoints,
   });
-  final Token token;
-  final String email;
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String referralCode;
+   Token token;
+   String email;
+   String firstName;
+   String lastName;
+   String phoneNumber;
+   String referralCode;
   double currentBalance;
   double referralPoints;
 

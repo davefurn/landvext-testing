@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
 import 'package:landvest/src/core/services/get_requests.dart';
 import 'package:landvest/src/core/widgets/dialog_boxes.dart';
 
@@ -105,14 +104,11 @@ class _GoalHubState extends ConsumerState<GoalHub> {
         enablePullUp: true,
         physics: const ClampingScrollPhysics(),
         onRefresh: () async {
-          var _ = ref.refresh(goalsProvider);
-          final a = await GetRequest.getAllSavings();
-
-          for (final e in a!.data! as List) {
-            if (e['id'] == widget.goal.id) {
-              e['current_balance'] = widget.goal.currentBalance;
-            }
-          }
+          final a =
+              await GetRequest.getSpecificSavings(widget.goal.id.toString());
+          setState(() {
+            widget.goal.currentBalance = a!.data['current_balance'];
+          });
 
           refreshController2.refreshCompleted();
           setState(() {});
@@ -289,7 +285,7 @@ class _GoalHubState extends ConsumerState<GoalHub> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'DESCRIPTION',
+                      'Description',
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,

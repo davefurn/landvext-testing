@@ -11,22 +11,27 @@ SECRET_KEY = env(
     default="iD8CoiVswTnl5rK2OaMi8ol87KpQpVnX4cm1vGQV78bamd56EqnO4pErinovPacV",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["*"]
 
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-DEFAULT_FROM_EMAIL = env(
-    "DJANGO_DEFAULT_FROM_EMAIL",
-    default="landvest <noreply@emmadjango.tech>",
+EMAIL_SUBJECT_PREFIX = env(
+    "DJANGO_EMAIL_SUBJECT_PREFIX",
+    default="landvest | ",
 )
-EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
-SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
-DJANGO_SERVER_EMAIL_HOST = env('DJANGO_SERVER_EMAIL_HOST', default="smtp.gmail.com")  # SMTP server
-DJANGO_SERVER_EMAIL_PORT = env.int('DJANGO_SERVER_EMAIL_PORT', default=587)  # SMTP port
-EMAIL_USE_TLS = True
-DJANGO_SERVER_EMAIL_PASSWORD = env('DJANGO_SERVER_EMAIL_PASSWORD', default=None)    # Replace with your email password
-
+EMAIL_BACKEND = env(
+    "EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend"
+)
+EMAIL_HOST = env("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", default=False)
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="landvest <noreply@emmadjango.tech>")
+DEFAULT_FROM_EMAIL = env(
+    "DEFAULT_FROM_EMAIL", default="landvest <noreply@emmadjango.tech>"
+)
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="password")
 
 # django-debug-toolbar
 # ------------------------------------------------------------------------------

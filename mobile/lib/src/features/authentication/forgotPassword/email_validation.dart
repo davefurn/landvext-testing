@@ -13,7 +13,7 @@ class EmailValidation extends StatefulWidget {
 
 class _EmailValidationState extends State<EmailValidation> {
   final _formKey = GlobalKey<FormState>();
-  late AssetImage assets;
+
   late TextEditingController textEditingController;
   late StreamController<ErrorAnimationType> errorController;
   String currentText = '';
@@ -82,8 +82,6 @@ class _EmailValidationState extends State<EmailValidation> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    precacheImage(assets, context);
   }
 
   @override

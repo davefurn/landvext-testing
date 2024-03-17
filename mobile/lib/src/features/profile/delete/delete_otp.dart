@@ -12,7 +12,7 @@ class DeleteOtp extends StatefulWidget {
 
 class _DeleteOtpState extends State<DeleteOtp> {
   final _formKey = GlobalKey<FormState>();
-  late AssetImage assets;
+
   late TextEditingController textEditingController;
   late StreamController<ErrorAnimationType> errorController;
   String currentText = '';
@@ -75,13 +75,6 @@ class _DeleteOtpState extends State<DeleteOtp> {
     setState(() {
       state = LoadingState.normal;
     });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(assets, context);
   }
 
   @override

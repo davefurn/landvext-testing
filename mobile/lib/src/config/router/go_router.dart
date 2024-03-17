@@ -13,6 +13,9 @@ import 'package:landvest/src/features/profile/my_properties.dart';
 import 'package:landvest/src/features/profile/otp_email.dart';
 import 'package:landvest/src/features/profile/privacy.dart';
 import 'package:landvest/src/features/profile/saved.dart';
+import 'package:landvest/src/features/properties/model/model.dart';
+import 'package:landvest/src/features/properties/view/sell.dart';
+import 'package:landvest/src/features/properties/view/view.dart';
 import 'package:landvest/src/features/savings/model/goal.dart';
 import 'package:landvest/src/features/savings/views/deposit/card_deposit.dart';
 import 'package:landvest/src/features/savings/views/deposit/deposit.dart';
@@ -90,11 +93,28 @@ class AppRouter {
                   GoRoute(
                     name: AppRoutes.referral.name,
                     path: AppRoutes.referral.path,
-                    pageBuilder: (context, state) => NoTransitionPage(
+                    pageBuilder: (context, state) => CupertinoPage(
                       child: Referral(
                         referralPoints: state.pathParameters['referralPoint']!,
                       ),
                     ),
+                  ),
+                  GoRoute(
+                    name: AppRoutes.properties.name,
+                    path: AppRoutes.properties.path,
+                    pageBuilder: (context, state) =>
+                        const CupertinoPage(child: Properties()),
+                  ),
+                  GoRoute(
+                    name: AppRoutes.sell.name,
+                    path: AppRoutes.sell.path,
+                    pageBuilder: (context, state) {
+                      PropertiesModel propertiesModel =
+                          state.extra! as PropertiesModel;
+                      return CupertinoPage(
+                        child: Sell(propertiesModel: propertiesModel),
+                      );
+                    },
                   ),
                   GoRoute(
                     name: AppRoutes.history.name,
@@ -295,7 +315,7 @@ class AppRouter {
                       child: DeleteAccount(),
                     ),
                   ),
-                   GoRoute(
+                  GoRoute(
                     name: AppRoutes.requestDeleteAccount.name,
                     path: AppRoutes.requestDeleteAccount.path,
                     pageBuilder: (context, state) => const CupertinoPage(

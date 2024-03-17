@@ -1,4 +1,8 @@
-version: '3'
+version: "3.8"
+
+
+volumes:
+  lanvest_postgres_data: {}
 
 services:
   app: &app
@@ -6,8 +10,43 @@ services:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
 
-    image: landvest_production_app
+    image: landvest_app:${APP_VERSION:-latest}
+    container_name: landvest_app
+    restart: always
+    deploy:
+      update_config:
+        delay: 3s
+        order: start-first
+    depends_on:
+      - postgres
     env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.postgres
+      - ${DJANGO_ENV_FILE:-./.envs/.production/.django}
+      - ${POSTGRES_ENV_FILE:-./.envs/.production/.postgres}
+    ports:
+      - "5000:5000"
     command: /start
+
+  postgres:
+    image: postgres:16.0-alpine
+    container_name: landvest_postgres
+    restart: always
+    volumes:
+      - lanvest_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ${POSTGRES_ENV_FILE:-./.envs/.production/.postgres}
+    ports:
+      - "5432:5432"
+
+  nginx:
+    image: nginx:1.25.2
+    container_name: landvest_nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx/production/nginx.conf:/etc/nginx/nginx.conf
+      - ${SSL_CERT:-./config/ssl/cert.pem}:/etc/ssl/nginx.crt
+      - ${SSL_KEY:-./config/ssl/privatekey.pem}:/etc/ssl/nginx.key
+    depends_on:
+      - app

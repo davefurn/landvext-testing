@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -204,10 +205,27 @@ class BiometricState {
                   data.token.accessToken = value.data['access'];
                   data.token.refreshToken = value.data['refresh'];
 
+                  final c = await GetRequest.getUserLoginCredentailsBiometrics(
+                    value.data['access'],
+                  );
+
+                  await LocalStorage.instance
+                      .setCurrentBalance(c!.data['current_balance'].toString());
+                  data
+                    ..currentBalance = c.data['current_balance']
+                    ..email = c.data['email']
+                    ..firstName = c.data['first_name']
+                    ..lastName = c.data['last_name']
+                    ..referralCode = c.data['referral_code']
+                    ..referralPoints = c.data['referral_points']
+                    ..phoneNumber = c.data['phone_number'];
+
                   if (context.mounted) {
                     context.goNamed(AppRoutes.home.name, extra: data);
                   }
-                } else {}
+                } else {
+                  log(value.data);
+                }
               }
             },
           );

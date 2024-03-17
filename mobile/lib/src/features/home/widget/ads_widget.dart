@@ -130,6 +130,8 @@ class GeneralCard extends StatelessWidget {
                     ],
                   ),
                 ),
+             
+             
               ],
             ),
             if (comingSoon)

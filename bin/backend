@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../" && pwd)"
+
+usage() {
+    cat <<EOF
+Usage: $0 <options>
+
+Options:
+  --cert          Path to ssl certificate or fullchain.
+  --django-env    Path to Django env file.
+  -h, --help      Display this message and exit.
+  --key           Path to ssl private key.
+  --postgres-env  Path to Postgres env file.
+EOF
+}
+
+swarm_mode=
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+    --django-env) export DJANGO_ENV_FILE=$2 ;;
+    --postgres-env) export POSTGRES_ENV_FILE=$2 ;;
+    --cert) export SSL_CERT=$2 ;;
+    --key) export SSL_KEY=$2 ;;
+    -h | --help) usage ;;
+    --swarm) swarm_mode=true; shift && continue ;;
+    *)
+        echo "Unsupported argument $1. Run $0 --help for available options." >&2
+        exit 1
+        ;;
+  esac
+  shift 2
+done
+
+cd "$ROOT_DIR"
+export APP_VERSION=$(git rev-parse --short HEAD)
+
+if [[ $swarm_mode ]]; then
+    docker compose -f "$ROOT_DIR/backend/production.yml" build
+    docker stack deploy -c "$ROOT_DIR/backend/production.yml" landvext
+else
+    docker compose -f "$ROOT_DIR/backend/production.yml" up -d
+fi

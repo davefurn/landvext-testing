@@ -12,6 +12,14 @@ enum AppRoutes {
     name: 'goalCreation',
     path: 'goalCreation',
   ),
+  sell(
+    name: 'sell',
+    path: 'sell',
+  ),
+    properties(
+    name: 'properties',
+    path: 'properties',
+  ),
   deleteAccount(
     name: 'deleteAccount',
     path: 'deleteAccount',

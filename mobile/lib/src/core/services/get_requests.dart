@@ -4,9 +4,30 @@ import 'package:landvest/src/features/home/model/paginations_model.dart';
 class GetRequest {
   static final NetworkService network = NetworkService();
 
+  static Future<Response<dynamic>?> getSpecificSavings(String id) async {
+    var path = 'v1/savings/$id/';
+    var token = (await LocalStorage.instance.getAccessToken())!;
+
+    return network.getRequestHandler(
+      path,
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
+  }
+
   static Future<Response<dynamic>?> getAllSavings() async {
     var path = 'v1/savings';
     var token = (await LocalStorage.instance.getAccessToken())!;
+
+    return network.getRequestHandler(
+      path,
+      options: Options(headers: {'Authorization': 'JWT $token'}),
+    );
+  }
+
+  static Future<Response<dynamic>?> getUserLoginCredentailsBiometrics(
+    String token,
+  ) async {
+    var path = 'v1/users/me';
 
     return network.getRequestHandler(
       path,

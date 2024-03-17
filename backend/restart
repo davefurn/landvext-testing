@@ -1,1 +1,0 @@
-clear && sudo docker compose -f local.yml restart && sudo docker compose -f local.yml up

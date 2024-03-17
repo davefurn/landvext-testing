@@ -12,7 +12,7 @@ class OtpEmailProfile extends StatefulWidget {
 
 class _OtpEmailProfileState extends State<OtpEmailProfile> {
   final _formKey = GlobalKey<FormState>();
-  late AssetImage assets;
+
   late TextEditingController textEditingController;
   late StreamController<ErrorAnimationType> errorController;
   String currentText = '';
@@ -78,13 +78,7 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(assets, context);
-  }
-
+ 
   @override
   void dispose() {
     errorController.close();

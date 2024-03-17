@@ -1,4 +1,4 @@
-version: '3'
+version: "3.8"
 
 services:
   app: &app
@@ -7,11 +7,34 @@ services:
       dockerfile: ./compose/local/django/Dockerfile
     image: landvest_local_app
     container_name: landvest_local_app
+    depends_on:
+      - postgres
     volumes:
       - .:/app:z
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     ports:
-      - '8000:8000'
+      - "8000:8000"
     command: /start
+
+  postgres:
+    image: postgres:16.0-alpine
+    container_name: landvest_local_postgres
+    restart: always
+    volumes:
+      - /var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5445:5432"
+
+  nginx:
+    image: nginx:1.25.2
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/nginx/local/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
