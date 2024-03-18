@@ -4,13 +4,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:landvest/firebase_options.dart';
 import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/notifications/messages.dart';
 import 'package:landvest/src/core/riverpod/providers.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
+  WidgetsFlutterBinding.ensureInitialized();
   // Determine the user's preferred locale from the device settings
   ui.Locale? userLocale = ui.PlatformDispatcher.instance.locale;
 
@@ -33,7 +30,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseApi().initNotification();
 
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
@@ -52,7 +48,7 @@ void main() async {
   );
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({
     required this.userLocale,
     super.key,
@@ -60,19 +56,7 @@ class MyApp extends ConsumerStatefulWidget {
   final Locale userLocale;
 
   @override
-  ConsumerState<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
-  @override
-  void initState() {
-    FlutterNativeSplash.remove();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) => ScreenUtilInit(
+  Widget build(BuildContext context, WidgetRef ref) => ScreenUtilInit(
         designSize: const Size(375, 812),
         splitScreenMode: true,
         minTextAdapt: true,
@@ -104,10 +88,10 @@ class _MyAppState extends ConsumerState<MyApp> {
               ],
               supportedLocales: [
                 // List your supported locales here
-                widget.userLocale,
+                userLocale,
                 const ui.Locale('en', 'US'),
               ],
-              locale: widget.userLocale,
+              locale: userLocale,
               routerConfig: AppRouter.router,
               debugShowCheckedModeBanner: false,
               title: 'LandVest',

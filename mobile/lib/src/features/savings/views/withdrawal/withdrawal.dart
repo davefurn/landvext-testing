@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:landvest/src/core/constants/imports.dart';
 import 'package:landvest/src/core/functions/money_formatter.dart';
 import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/core/services/postRequests/withdrawal.dart';
 import 'package:landvest/src/core/widgets/app_error.dart';
 import 'package:landvest/src/features/savings/views/withdrawal/model/model.dart';
 import 'package:landvest/src/features/savings/views/withdrawal/model/receipt.dart';
@@ -54,7 +53,7 @@ class _WithDrawalState extends ConsumerState<WithDrawal> {
       accountName: accountName.toString(),
       bank: searchBanks.text,
       accountNumber: account.text,
-      amount: double.parse(amount.text),
+      amount: double.parse(amount.text.replaceAll(',', '')),
       date: now.toLocal().toString(),
       time: '${now.hour}:${now.minute}',
     );

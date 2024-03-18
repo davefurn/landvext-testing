@@ -297,6 +297,7 @@ class _ScaffoldWithNavBarState extends ConsumerState<ScaffoldWithNavBar> {
             ),
           ],
         ),
+      
       );
 
   void _onTap(BuildContext context, int index) {
@@ -304,5 +305,6 @@ class _ScaffoldWithNavBarState extends ConsumerState<ScaffoldWithNavBar> {
       index,
       initialLocation: index == widget.navigationShell.currentIndex,
     );
+     setState(() {});
   }
 }

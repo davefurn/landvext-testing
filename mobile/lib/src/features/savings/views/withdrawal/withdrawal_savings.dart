@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:landvest/src/core/constants/imports.dart';
 import 'package:landvest/src/core/functions/money_formatter.dart';
 import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/core/services/postRequests/withdrawal.dart';
 import 'package:landvest/src/core/widgets/app_error.dart';
 import 'package:landvest/src/features/savings/views/withdrawal/model/model.dart';
 
@@ -21,6 +20,7 @@ class WithDrawalSavings extends ConsumerStatefulWidget {
 }
 
 class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
+  bool isLoading = false;
   String? selectedValue;
   String? accountName;
   String? validAccountNumber;
@@ -75,6 +75,16 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
     setState(() {
       state = LoadingState.normal;
     });
+  }
+
+  void _showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
   }
 
   @override
@@ -306,7 +316,7 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
               onChanged: (value) async {
                 if (value.length == 10) {
                   final NetworkService network = NetworkService();
-
+                  _showLoadingDialog(context);
                   await network.postRequestHandler(
                       'v1/users/get-account-info-providus-nip/', {
                     'account_number': account.text,
@@ -327,6 +337,13 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                       }
                     },
                   );
+                  if (context.mounted) {
+                    context.pop();
+                  }
+                } else {
+                  setState(() {
+                    accountName = '';
+                  });
                 }
               },
               onEditingComplete: () async {

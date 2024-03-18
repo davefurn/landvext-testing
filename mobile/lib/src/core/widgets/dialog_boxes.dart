@@ -29,7 +29,7 @@ class DialogBoxes extends StatelessWidget {
           vertical: 16.h,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(4.r),
         ),
         title: icon,
         children: [

@@ -1,7 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:landvest/src/core/constants/imports.dart';
 import 'package:landvest/src/core/functions/money_formatter.dart';
-import 'package:landvest/src/core/services/postRequests/create_savings.dart';
 
 class GoalCreate extends StatefulWidget {
   const GoalCreate({Key? key}) : super(key: key);

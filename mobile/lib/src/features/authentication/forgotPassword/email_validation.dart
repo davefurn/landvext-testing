@@ -1,7 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/services/postRequests/verify_email.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class EmailValidation extends StatefulWidget {

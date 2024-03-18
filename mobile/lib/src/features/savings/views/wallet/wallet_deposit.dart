@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
 import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/services/postRequests/create_wallet_providus.dart';
 
 class WalletDeposit extends StatefulWidget {
   const WalletDeposit({Key? key}) : super(key: key);

@@ -1,5 +1,4 @@
 import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/services/postRequests/create_wallet_providus.dart';
 import 'package:landvest/src/features/savings/views/wallet/model/model.dart';
 
 class ProvidusWallet extends StatefulWidget {
