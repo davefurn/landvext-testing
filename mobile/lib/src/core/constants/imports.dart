@@ -21,7 +21,6 @@ export 'package:landvest/src/core/constants/endpoints.dart';
 export 'package:landvest/src/core/enums/enums.dart';
 export 'package:landvest/src/core/services/local_storage.dart';
 export 'package:landvest/src/core/services/network.dart';
-export 'package:landvest/src/core/services/post_requests.dart';
 export 'package:landvest/src/core/types/types.dart';
 export 'package:landvest/src/core/widgets/button_save.dart';
 export 'package:landvest/src/core/widgets/custom_app_bar.dart';

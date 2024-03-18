@@ -1,4 +1,5 @@
 import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvest/src/core/services/postRequests/deposit_from_wallet.dart';
 
 class InputAmountDeposit extends StatefulWidget {
   const InputAmountDeposit({required this.id, Key? key}) : super(key: key);

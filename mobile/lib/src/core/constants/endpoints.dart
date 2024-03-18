@@ -1,5 +1,5 @@
 class AppEndpoints {
-  static const String baseUrl = 'https://app.landvext.co/api/';
+   static const String baseUrl = 'https://app.landvext.co/api/';
   static const String getAllBanks = 'http://154.113.16.142:8882/';
   static const String login = 'v1/users/login/';
   static const String signUp = 'v1/users/signup-otp/';
@@ -14,4 +14,5 @@ class AppEndpoints {
   static const String deleteAccount = 'v1/users/delete/';
   static const String requestOtpDelete = 'v1/users/request-account-deletion/';
   static const String changePassword = 'v1/users/change-password/';
+  static const String sendFeedback = 'v1/users/give-feedback/';
 }
