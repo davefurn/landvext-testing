@@ -1,5 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class SuccessfulSignUp extends StatefulWidget {
   const SuccessfulSignUp({super.key});
@@ -14,7 +14,6 @@ class _SuccessfulSignUpState extends State<SuccessfulSignUp> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2), () async {
-      // LoginData data = await LocalStorage.instance.getUserData();
       if (context.mounted) {
         context.goNamed(
           AppRoutes.logIn.name,

@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/deposit_from_wallet.dart';
 
 class InputAmountDeposit extends StatefulWidget {
   const InputAmountDeposit({required this.id, Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _InputAmountDepositState extends State<InputAmountDeposit> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.depositFromWallet(
+    await PostRequestDepositFromWallet.depositFromWallet(
       context,
       amount: int.parse(amount.text),
       id: widget.id,

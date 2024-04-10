@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class AppLocalizations {
   AppLocalizations(this.locale);

@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/functions/money_formatter.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/functions/money_formatter.dart';
+import 'package:landvext/src/core/services/postRequests/requests/create_savings.dart';
 
 class GoalCreate extends StatefulWidget {
   const GoalCreate({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _GoalCreateState extends State<GoalCreate> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.createSavings(
+    await PostRequestCreateSavings.createSavings(
       context,
       target: int.tryParse(amount.text.replaceAll(',', '')),
       savingsType: selectedValue == 1 ? 'LAND' : 'RENT',
@@ -273,8 +274,6 @@ class _GoalCreateState extends State<GoalCreate> {
                       value: selectedValueDrop,
                       isExpanded: true,
                       decoration: InputDecoration(
-                        // Add Horizontal padding using menuItemStyleData.padding so it matches
-                        // the menu padding when button's width is not specified.
                         contentPadding: const EdgeInsets.symmetric(vertical: 8),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4.r),
@@ -295,7 +294,6 @@ class _GoalCreateState extends State<GoalCreate> {
                             color: Color(0xffEAECF4),
                           ),
                         ),
-                        // Add more decoration..
                       ),
                       hint: Text(
                         'Deposit Frequency',
@@ -394,7 +392,7 @@ class _GoalCreateState extends State<GoalCreate> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Text(
-                    '₦ ${result.toStringAsFixed(2).replaceAll(RegExp(r'\B(?=(\d{3})+(?!\d))'), ',')} ${selectedValueDrop ?? ''}'
+                    '₦${result.toStringAsFixed(2).replaceAll(RegExp(r'\B(?=(\d{3})+(?!\d))'), ',')} ${selectedValueDrop ?? ''}'
                         .toLowerCase(),
                     style: TextStyle(
                       fontSize: 20.sp,

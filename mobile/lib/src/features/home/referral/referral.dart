@@ -2,11 +2,12 @@ import 'dart:developer';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/core/widgets/app_error.dart';
-import 'package:landvest/src/core/widgets/item_list.dart';
-import 'package:landvest/src/features/home/referral/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/providers.dart';
+import 'package:landvext/src/core/widgets/app_error.dart';
+import 'package:landvext/src/core/widgets/item_list.dart';
+import 'package:landvext/src/features/home/referral/model/model.dart';
+import 'package:landvext/src/features/home/widget/dashboard_referral.dart';
 
 class Referral extends ConsumerStatefulWidget {
   const Referral({
@@ -75,113 +76,7 @@ class _ReferralState extends ConsumerState<Referral> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             18.verticalSpace,
-            Container(
-              height: 167.h,
-              margin: EdgeInsets.symmetric(horizontal: 20.w),
-              decoration: BoxDecoration(
-                color: LandColors.transparent,
-                image: DecorationImage(
-                  image: assetsI,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(6.r),
-              ),
-              child: Stack(
-                children: [
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Total Referral coins',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: LandColors.backgroundColour,
-                          ),
-                        ),
-                        Text(
-                          widget.referralPoints,
-                          style: TextStyle(
-                            fontSize: 64.sp,
-                            fontWeight: FontWeight.w700,
-                          ),
-                          textAlign: TextAlign.center,
-                        ).animate().fadeIn(),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.h),
-                      child: SizedBox(
-                        height: 21.h,
-                        child: CustomButton(
-                          text: 'Info',
-                          onpressed: () => showModalBottomSheet(
-                            context: globalContext,
-                            isScrollControlled: true,
-                            builder: (context) => SizedBox(
-                              width: double.maxFinite,
-                              height: MediaQuery.of(context).size.height * .5,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 47.979736328125.w,
-                                    height: 5.3447265625.h,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50.r),
-                                      color: LandColors.dotGrey,
-                                    ),
-                                    margin: EdgeInsets.only(top: 7.92.h),
-                                  ),
-                                  28.63.verticalSpace,
-                                  Text(
-                                    'How to redeem your coins',
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: LandColors.textColorVeryBlack,
-                                    ),
-                                  ),
-                                  21.23.verticalSpace,
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: 21.94.w,
-                                      right: 22.94.w,
-                                    ),
-                                    child: Text(
-                                      "Enter the referral code provided to you by your friend or the person who referred you.Redeem Your Reward: Once the code is successfully entered, you'll receive your referral reward. This could be in the form of discounts, bonuses, or any other benefit offered by our app.Enjoy the Perks: You can now enjoy the perks or bonuses you've received from the referral. Be sure to check the terms and conditions associated with the referral offer to understand how it works.",
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: LandColors.textColorGrey,
-                                        wordSpacing: -0.2,
-                                      ),
-                                      textAlign: TextAlign.start,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          thickLine: 1,
-                          radius: 50.r,
-                          width: 75.w,
-                          height: 21.h,
-                          hpD: 7.5.w,
-                          fontWeight: FontWeight.w500,
-                          borderColor: LandColors.transparent,
-                          color: LandColors.backgroundColour.withOpacity(.50),
-                          textcolor: LandColors.backgroundColour,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            DashBoardReferral(assetsI: assetsI, widget: widget),
             33.verticalSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),

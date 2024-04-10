@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:landvest/src/core/constants/endpoints.dart';
+import 'package:landvext/src/core/constants/endpoints.dart';
 
 class NetworkService {
   static final Dio _dio = Dio()

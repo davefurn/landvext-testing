@@ -1,5 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/invest/widget/buy_card.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/invest/widget/buy_card.dart';
 
 class BuyInvestment extends StatelessWidget {
   const BuyInvestment({Key? key}) : super(key: key);
@@ -28,11 +28,9 @@ class BuyInvestment extends StatelessWidget {
                       image: LandAssets.defaultImage,
                       title: 'Capital City Estate',
                       location: 'Cluster Omega, Jakarta',
-                      perUnit: '1 unit',
+                      perUnit: '20 plots',
                       unitPrice: '₦2,500,000',
-                      onpressed: () {
-                        context.goNamed(AppRoutes.deposit.name);
-                      },
+                      onpressed: () {},
                     ),
                   ),
                 ),

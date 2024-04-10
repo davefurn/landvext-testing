@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class ShowFlushBar {
   static Future<void> showError({
@@ -58,7 +58,6 @@ class ShowFlushBar {
     Duration? duration,
     Function()? perform,
   }) async {
-    TranslateType translate = AppLocalizations.of(context)!.translate;
     final flushBar = Flushbar(
       backgroundColor: const Color(0xffEDFFF5),
       borderColor: LandColors.green,
@@ -69,7 +68,7 @@ class ShowFlushBar {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Succesful',
+            'Successful',
             textAlign: TextAlign.start,
             style: TextStyle(
               color: LandColors.textColorVeryBlack,
@@ -79,7 +78,7 @@ class ShowFlushBar {
             ),
           ),
           Text(
-            message ?? translate('snackbar:code_null_internet'),
+            message ?? '',
             textAlign: TextAlign.start,
             style: TextStyle(
               color: LandColors.textColorGrey,

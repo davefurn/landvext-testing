@@ -2,9 +2,9 @@ import 'dart:ui' as ui;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/firebase_options.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
+import 'package:landvext/firebase_options.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/log_out.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -92,9 +92,9 @@ class MyApp extends ConsumerWidget {
                 const ui.Locale('en', 'US'),
               ],
               locale: userLocale,
-              routerConfig: AppRouter.router,
+              routerConfig: router,
               debugShowCheckedModeBanner: false,
-              title: 'LandVest',
+              title: 'landvext',
               theme: LandTheme.lightTheme,
             ),
           ),

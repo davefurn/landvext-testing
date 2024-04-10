@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_constructors_over_static_methods
-
 class Token {
-   Token({
+  Token({
     required this.refreshToken,
     required this.accessToken,
   });
-   String refreshToken;
-   String accessToken;
+  String refreshToken;
+  String accessToken;
 
   static Token fromJson(Map<String, dynamic> data) => Token(
         refreshToken: data['refresh'],
@@ -25,12 +23,12 @@ class LoginData {
     required this.currentBalance,
     required this.referralPoints,
   });
-   Token token;
-   String email;
-   String firstName;
-   String lastName;
-   String phoneNumber;
-   String referralCode;
+  Token token;
+  String email;
+  String firstName;
+  String lastName;
+  String phoneNumber;
+  String referralCode;
   double currentBalance;
   double referralPoints;
 
@@ -44,7 +42,4 @@ class LoginData {
         currentBalance: data['current_balance'],
         referralPoints: data['referral_points'] ?? 0.0,
       );
-
-
-  
 }

@@ -1,5 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/home/widget/quick_links.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/home/widget/quick_links.dart';
 
 class QuickLinksTab extends StatelessWidget {
   const QuickLinksTab({
@@ -44,10 +44,7 @@ class QuickLinksTab extends StatelessWidget {
               icon: LandAssets.properties,
               text: 'Properties',
               onTap: () {
-                context.pushNamed(AppRoutes.myProperties.name);
-                // context.pushNamed(
-                //   AppRoutes.properties.name,
-                // );
+                context.pushNamed(AppRoutes.properties.name);
               },
             ),
           ],
@@ -66,7 +63,7 @@ class Textss extends StatelessWidget {
           horizontal: 20.w,
         ),
         child: Text(
-          'Real Estate Portfolio',
+          'Purchased Properties',
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,

@@ -1,6 +1,8 @@
 import 'dart:async';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/email_sent.dart';
+import 'package:landvext/src/features/authentication/forgotPassword/widgets/back_button.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_emails.dart';
 
 class SentEmail extends StatefulWidget {
   const SentEmail({super.key});
@@ -56,7 +58,7 @@ class _SentEmailState extends State<SentEmail> {
       state = LoadingState.loading;
     });
 
-    await PostRequest.emailSent(
+    await PostRequestEmailSent.emailSent(
       context,
       email: textEditingController.text,
     );
@@ -80,28 +82,10 @@ class _SentEmailState extends State<SentEmail> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 77.6.h,
-            ).copyWith(bottom: 0.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () {
-                    context.pop();
-                  },
-                  child: SvgPicture.asset(
-                    LandAssets.backThree,
-                  ),
-                ),
-                SizedBox(
-                  height: 47.936.h,
-                  width: 47.936.w,
-                ),
-              ],
-            ),
+          BackButtonss(
+            ontap: () {
+              context.pop();
+            },
           ),
           50.verticalSpace,
           Texts(
@@ -128,27 +112,10 @@ class _SentEmailState extends State<SentEmail> {
           25.verticalSpace,
           Form(
             key: _formKey,
-            child: CustomTextInput(
-              validator: (value) {
-                bool isEmptyOrNull = value == null || value.isEmpty;
-                if (isEmptyOrNull ||
-                    !LandConstants.emailRegEx.hasMatch(value)) {
-                  return translate(
-                    'authentication:login_textfield_email_validation',
-                  );
-                }
-
-                return null;
-              },
-              hintText: translate(
-                'authentication:sent_email_hint',
-              ),
-              textInputAction: TextInputAction.next,
-              autovalidateMode: submitted
-                  ? AutovalidateMode.onUserInteraction
-                  : AutovalidateMode.disabled,
-              keyboardType: TextInputType.emailAddress,
-              controller: textEditingController,
+            child: LoginEmailInput(
+              emailController: textEditingController,
+              translate: translate,
+              submitted: submitted,
             ),
           ),
           19.4.verticalSpace,

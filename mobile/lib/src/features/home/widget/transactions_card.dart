@@ -1,7 +1,7 @@
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/home/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/home/model/model.dart';
 
 class Transcations extends StatelessWidget {
   const Transcations({

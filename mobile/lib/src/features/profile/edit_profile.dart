@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/widgets/item_list.dart';
-import 'package:landvest/src/features/profile/widgets/edit_card.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/widgets/item_list.dart';
+import 'package:landvext/src/features/profile/widgets/edit_card.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);

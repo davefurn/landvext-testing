@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class Texts extends StatelessWidget {
   const Texts({

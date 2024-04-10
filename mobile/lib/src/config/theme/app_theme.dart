@@ -1,10 +1,16 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class LandTheme {
   LandTheme._();
   static ThemeData lightTheme = ThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: LandColors.backgroundColour,
+    ),
+    dialogBackgroundColor: LandColors.backgroundColour,
+    dialogTheme: const DialogTheme(
+      backgroundColor: LandColors.backgroundColour,
+    ),
     primaryColor: LandColors.mainColor,
-    useMaterial3: true,
     brightness: Brightness.light,
     fontFamily: 'Inter',
     textTheme: TextsTheme.lightTheme,

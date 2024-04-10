@@ -1,7 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
+import 'package:in_app_update/in_app_update.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/biometrics/bio.dart';
+import 'package:landvext/src/core/riverpod/biometrics/bio_dialog.dart';
+import 'package:landvext/src/core/services/postRequests/requests/login.dart';
+import 'package:landvext/src/features/authentication/logIn/widget/fingerprint.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_emails.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_password.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -19,36 +27,79 @@ class _LoginState extends State<Login> {
   bool submitted = false;
   LoadingState state = LoadingState.normal;
   bool isVisible = false;
+  BiometricLoad load = BiometricLoad.normal;
   @override
   void initState() {
     super.initState();
     setState(() {
       state = LoadingState.normal;
+      load = BiometricLoad.normal;
     });
 
     passwordController = TextEditingController();
     emailController = TextEditingController();
+    if (Platform.isAndroid) {
+      InAppUpdate.checkForUpdate().then((updateInfo) {
+        if (updateInfo.updateAvailability ==
+            UpdateAvailability.updateAvailable) {
+          if (updateInfo.immediateUpdateAllowed) {
+            // Perform immediate update
+            InAppUpdate.performImmediateUpdate().then((appUpdateResult) {
+              if (appUpdateResult == AppUpdateResult.success) {
+                //App Update successful
+              }
+            });
+          } else if (updateInfo.flexibleUpdateAllowed) {
+            //Perform flexible update
+            InAppUpdate.startFlexibleUpdate().then((appUpdateResult) {
+              if (appUpdateResult == AppUpdateResult.success) {
+                //App Update successful
+                InAppUpdate.completeFlexibleUpdate();
+              }
+            });
+          }
+        }
+      });
+    }
   }
 
   Future<void> login() async {
-    setState(() {
-      state = LoadingState.loading;
-    });
-
-    await PostRequest.login(
-      context,
-      email: emailController.text,
-      password: passwordController.text,
+    var data = LoginData(
+      referralCode: 'referralCode',
+      token: Token(
+          refreshToken: 'refreshToken',
+          accessToken:
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzEyODY5MTA5LCJpYXQiOjE3MTI3ODI3MDksImp0aSI6IjllZWEzMzEyMTFjYTQ2NmFhZmZiOGE3Y2QxMmZmN2Y0IiwidXNlcl9pZCI6NDd9.Lbs0LBDeWd_ATP293d9x7r6hnp7jWMzsRHmi4yBW1I0'),
+      email: 'email',
+      firstName: 'firstName',
+      lastName: 'lastName',
+      phoneNumber: 'phoneNumber',
+      currentBalance: 0.0,
+      referralPoints: 0.0,
     );
-    setState(() {
-      state = LoadingState.normal;
-    });
+    context.goNamed(
+      AppRoutes.home.name,
+      extra: data,
+    );
+    // setState(() {
+    //   state = LoadingState.loading;
+    // });
+
+    // // await PostRequestLogin.login(
+    // //   context,
+    // //   email: emailController.text,
+    // //   password: passwordController.text,
+    // // );
+    // setState(() {
+    //   state = LoadingState.normal;
+    // });
   }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+
     super.dispose();
   }
 
@@ -74,62 +125,22 @@ class _LoginState extends State<Login> {
                     ),
               ),
               50.verticalSpace,
-              CustomTextInput(
-                validator: (value) {
-                  if ((value == null || value.isEmpty) ||
-                      !LandConstants.emailRegEx.hasMatch(value)) {
-                    return translate(
-                      'authentication:login_textfield_email_validation',
-                    );
-                  }
-
-                  return null;
-                },
-                hintText: translate('authentication:login_textfield_email'),
-                textInputAction: TextInputAction.next,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                keyboardType: TextInputType.emailAddress,
-                controller: emailController,
+              LoginEmailInput(
+                translate: translate,
+                submitted: submitted,
+                emailController: emailController,
               ),
               12.verticalSpace,
-              CustomTextInput(
-                controller: passwordController,
-                hintText: translate('authentication:login_textfield_password'),
-                validator: (v) {
-                  if (v == null || v.isEmpty || v.trim().length < 8) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_character_size',
-                    );
-                  } else if (!LandConstants.checkLettersregEx.hasMatch(v)) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_cases',
-                    );
-                  }
-                  return null; // to indicate a success
+              LoginPasswordInput(
+                passwordController: passwordController,
+                translate: translate,
+                isVisible: isVisible,
+                submitted: submitted,
+                onpressed: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
                 },
-                obscureText: isVisible,
-                keyboardType: TextInputType.visiblePassword,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                suffixIcon: IconButton(
-                  splashColor: LandColors.transparent,
-                  highlightColor: LandColors.transparent,
-                  iconSize: 18.sp,
-                  icon: Icon(
-                    isVisible
-                        ? Icons.visibility_outlined
-                        : Icons.visibility_off_outlined,
-                    color: LandColors.textColorHintGrey,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                ),
               ),
               12.verticalSpace,
               Padding(
@@ -149,7 +160,9 @@ class _LoginState extends State<Login> {
                         setState(() => submitted = true);
                         if (_formKey.currentState!.validate()) {
                           FocusManager.instance.primaryFocus?.unfocus();
-                          login();
+                          if (context.mounted) {
+                            login();
+                          }
                         }
                       },
                       text: translate('authentication:login_title'),
@@ -164,41 +177,26 @@ class _LoginState extends State<Login> {
                           onTap: () async {
                             try {
                               setState(() {
-                                state = LoadingState.loading;
+                                load = BiometricLoad.loading;
                               });
                               await biometricState.checkBiometricStatus(
                                 context,
                                 ref,
                               );
                               setState(() {
-                                state = LoadingState.normal;
+                                load = BiometricLoad.normal;
                               });
                             } on PlatformException catch (e) {
+                              setState(() {
+                                load = BiometricLoad.normal;
+                              });
                               if (kDebugMode) {
                                 print(e);
                               }
                             }
                           },
-                          child: Container(
-                            height: 48.h,
-                            width: 48.w,
-                            decoration: ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  width: 1.14,
-                                  color: Colors.black
-                                      .withOpacity(0.20000000298023224),
-                                ),
-                                borderRadius: BorderRadius.circular(4.57),
-                              ),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.fingerprint,
-                                size: 32.sp,
-                                color: LandColors.ascentColor,
-                              ),
-                            ),
+                          child: FingerPrintWidget(
+                            state: load,
                           ),
                         );
                       },

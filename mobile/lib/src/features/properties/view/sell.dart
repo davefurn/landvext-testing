@@ -1,8 +1,8 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/widgets/dialog_boxes.dart';
-import 'package:landvest/src/features/properties/model/model.dart';
-import 'package:landvest/src/features/properties/widgets/dialog.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/widgets/dialog_boxes.dart';
+import 'package:landvext/src/features/properties/model/model.dart';
+import 'package:landvext/src/features/properties/widgets/dialog.dart';
 
 class Sell extends StatelessWidget {
   const Sell({required this.propertiesModel, super.key});

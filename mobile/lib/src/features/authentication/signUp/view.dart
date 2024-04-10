@@ -1,7 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/authentication/signUp/model/sign_up.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/create_user.dart';
+import 'package:landvext/src/features/authentication/signUp/model/sign_up.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_emails.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_others.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_password.dart';
 
 class PersonalDetails extends StatefulWidget {
   const PersonalDetails({Key? key}) : super(key: key);
@@ -38,7 +42,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.createUser(
+    await PostRequestCreateUser.createUser(
       context,
       email: emailController.text,
       password: passwordController.text,
@@ -96,128 +100,46 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     ),
               ),
               50.verticalSpace,
-              CustomTextInput(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return translate(
-                      'authentication:signup_personal_textfield_validator',
-                    );
-                  }
-
-                  return null;
-                },
-                hintText: translate(
+              NameInput(
+                translate: translate,
+                submitted: submitted,
+                firstNameController: firstNameController,
+                hint: translate(
                   'authentication:signup_personal_textfield_first_name',
                 ),
-                textInputAction: TextInputAction.next,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                keyboardType: TextInputType.name,
-                controller: firstNameController,
               ),
               16.verticalSpace,
-              CustomTextInput(
-                textInputAction: TextInputAction.next,
-                controller: lastNameController,
-                hintText: translate(
+              NameInput(
+                hint: translate(
                   'authentication:signup_personal_textfield_last_name',
                 ),
-                validator: (v) {
-                  if (v == null || v.isEmpty) {
-                    return translate(
-                      'authentication:signup_personal_textfield_validator',
-                    );
-                  } else if (!LandConstants.nameExp.hasMatch(v)) {
-                    return translate(
-                      'authentication:signup_personal_textfield_validator',
-                    );
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.name,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
+                translate: translate,
+                submitted: submitted,
+                firstNameController: lastNameController,
               ),
               16.verticalSpace,
-              CustomTextInput(
-                validator: (value) {
-                  if ((value == null || value.isEmpty) ||
-                      !LandConstants.emailRegEx.hasMatch(value)) {
-                    return translate(
-                      'authentication:login_textfield_email_validation',
-                    );
-                  }
-
-                  return null;
-                },
-                hintText: translate('authentication:signup_textfield_email'),
-                textInputAction: TextInputAction.next,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                keyboardType: TextInputType.emailAddress,
-                controller: emailController,
+              LoginEmailInput(
+                translate: translate,
+                submitted: submitted,
+                emailController: emailController,
               ),
               16.verticalSpace,
-              CustomTextInput(
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return translate(
-                      'authentication:signup_textfield_phone_validation_phone',
-                    );
-                  } else if (!LandConstants.phoneExp.hasMatch(value)) {
-                    return translate(
-                      'authentication:signup_textfield_phone_validation_phone_valid',
-                    );
-                  }
-                  return null;
-                },
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.phone,
-                controller: phoneController,
-                hintText:
-                    translate('authentication:signup_textfield_phone_number'),
+              PhoneInput(
+                submitted: submitted,
+                translate: translate,
+                phoneController: phoneController,
               ),
               16.verticalSpace,
-              CustomTextInput(
-                controller: passwordController,
-                hintText: translate('authentication:signup_textfield_password'),
-                validator: (v) {
-                  if (v == null || v.isEmpty || v.trim().length < 8) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_character_size',
-                    );
-                  } else if (!LandConstants.checkLettersregEx.hasMatch(v)) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_cases',
-                    );
-                  }
-                  return null; // to indicate a success
+              LoginPasswordInput(
+                submitted: submitted,
+                translate: translate,
+                passwordController: passwordController,
+                isVisible: isVisible,
+                onpressed: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
                 },
-                obscureText: isVisible,
-                keyboardType: TextInputType.visiblePassword,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                suffixIcon: IconButton(
-                  splashColor: LandColors.transparent,
-                  highlightColor: LandColors.transparent,
-                  iconSize: 18.sp,
-                  icon: Icon(
-                    isVisible ? Icons.visibility_off : Icons.visibility,
-                    color: LandColors.textColorHintGrey,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                ),
               ),
               16.verticalSpace,
               CustomTextInput(
@@ -229,7 +151,6 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     ? AutovalidateMode.onUserInteraction
                     : AutovalidateMode.disabled,
               ),
-             
               16.verticalSpace,
               Padding(
                 padding: EdgeInsets.only(

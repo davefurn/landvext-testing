@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class MoneyTextFormatter extends TextInputFormatter {
   @override
@@ -8,9 +8,9 @@ class MoneyTextFormatter extends TextInputFormatter {
   ) {
     final int selectionIndex = newValue.selection.end;
 
-    String value = newValue.text;
-    value = value.replaceAll(',', '');
-    value = value.replaceAll(RegExp(r'\B(?=(\d{3})+(?!\d))'), ',');
+    String value = newValue.text
+        .replaceAll(',', '')
+        .replaceAll(LandConstants.regexName, ',');
     final int newSelectionIndex =
         selectionIndex + (value.length - newValue.text.length);
     return TextEditingValue(

@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class GeneralCard extends StatelessWidget {
   const GeneralCard({
@@ -92,7 +92,7 @@ class GeneralCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,
-                          color: LandColors.textColorVeryBlack,
+                          color: LandColors.mainColor,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -130,8 +130,6 @@ class GeneralCard extends StatelessWidget {
                     ],
                   ),
                 ),
-             
-             
               ],
             ),
             if (comingSoon)

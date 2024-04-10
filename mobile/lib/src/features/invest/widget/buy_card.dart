@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class BuyCard extends StatelessWidget {
   const BuyCard({
@@ -24,7 +24,7 @@ class BuyCard extends StatelessWidget {
             children: [
               Container(
                 height: 93.h,
-                width: 104.h,
+                width: 104.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.r),
                   image: DecorationImage(

@@ -1,6 +1,6 @@
-import 'package:landvest/src/core/constants/imports.dart';
-
-import 'package:landvest/src/core/widgets/item_list.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/widgets/item_list.dart';
+import 'package:landvext/src/features/profile/widgets/profile_name_widget.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -48,44 +48,9 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             18.verticalSpace,
-            Padding(
-              padding: EdgeInsets.only(
-                left: 20.w,
-              ),
-              child: Row(
-                children: [
-                  CircleAvatar(
-                    radius: 26.731445.r,
-                    backgroundColor: LandColors.greyNewColor.withOpacity(.2),
-                    backgroundImage:
-                        const AssetImage('assets/images/default/profile.png'),
-                  ),
-                  10.horizontalSpace,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: LandColors.textColorVeryBlack,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                      Text(
-                        phoneNumber,
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: LandColors.textColorGrey,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            ProfileAndName(
+              name: name,
+              phoneNumber: phoneNumber,
             ),
             30.verticalSpace,
             InkWell(
@@ -225,6 +190,7 @@ class _ProfileState extends State<Profile> {
                 borderColor: LandColors.redActive,
               ),
             ),
+            30.verticalSpace,
           ],
         ),
       ),

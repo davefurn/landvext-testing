@@ -1,19 +1,22 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/functions/money_formatter.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/core/widgets/app_error.dart';
-import 'package:landvest/src/features/savings/views/withdrawal/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/providers.dart';
+import 'package:landvext/src/core/services/postRequests/requests/withdrawal_savings.dart';
+import 'package:landvext/src/core/widgets/app_error.dart';
+import 'package:landvext/src/features/savings/views/withdrawal/model/model.dart';
+import 'package:landvext/src/features/savings/views/withdrawal/model/receipt.dart';
 
 class WithDrawalSavings extends ConsumerStatefulWidget {
   const WithDrawalSavings({
     required this.surCharge,
+    required this.id,
     required this.amount,
     super.key,
   });
   final String amount;
   final String surCharge;
+  final String id;
 
   @override
   ConsumerState<WithDrawalSavings> createState() => _WithDrawalSavingsState();
@@ -24,8 +27,8 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
   String? selectedValue;
   String? accountName;
   String? validAccountNumber;
+  String? bankName;
   late TextEditingController searchBanks;
-  late TextEditingController amount;
   late TextEditingController account;
   bool submitted = false;
   LoadingState state = LoadingState.normal;
@@ -37,7 +40,6 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
   void initState() {
     super.initState();
     searchBanks = TextEditingController();
-    amount = TextEditingController();
     account = TextEditingController();
   }
 
@@ -45,7 +47,7 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
   void dispose() {
     account.dispose();
     searchBanks.dispose();
-    amount.dispose();
+
     super.dispose();
   }
 
@@ -53,22 +55,31 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
     setState(() {
       state = LoadingState.loading;
     });
+    DateTime now = DateTime.now();
+    BankTransaction bankTransaction = BankTransaction(
+      accountName: accountName.toString(),
+      bank: bankName ?? '',
+      accountNumber: account.text,
+      amount:
+          double.parse(widget.amount.replaceAll(',', '').replaceAll('₦', '')),
+      date: now.toLocal().toString(),
+      time: '${now.hour}:${now.minute}',
+    );
+
+    await LocalStorage.instance.saveBankTransaction(bankTransaction);
     if (widget.surCharge == 'true') {
-      final value1 = double.tryParse(amount.text.replaceAll(',', ''));
-      final value2 = value1! * 0.1;
-      final value3 = value1 - value2;
-      await PostRequest.withDrawal(
+      await PostRequestWithDrawalSavings.withDrawalSavings(
         context,
         accountNumber: account.text,
-        amount: value3.toString(),
         bank: selectedValue,
+        id: widget.id,
       );
     } else {
-      await PostRequest.withDrawal(
+      await PostRequestWithDrawalSavings.withDrawalSavings(
         context,
         accountNumber: account.text,
-        amount: amount.text.replaceAll(',', ''),
         bank: selectedValue,
+        id: widget.id,
       );
     }
 
@@ -117,9 +128,6 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
             getAllBanks.when(
               data: (data) {
                 if (data?.statusCode == 200 && data != null) {
-                  // setState(() {
-                  //   defaultValue = data.data['current_balance'];
-                  // });
                   value = (data.data['banks'] as List)
                       .map((e) => Bank.fromJson(e))
                       .toList();
@@ -129,8 +137,6 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                           padding: EdgeInsets.symmetric(horizontal: 20.w),
                           child: DropdownButtonFormField2<String>(
                             decoration: InputDecoration(
-                              // Add Horizontal padding using menuItemStyleData.padding so it matches
-                              // the menu padding when button's width is not specified.
                               contentPadding:
                                   const EdgeInsets.symmetric(vertical: 16),
                               border: OutlineInputBorder(
@@ -159,8 +165,20 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                             isExpanded: true,
                             value: selectedValue,
                             onChanged: (newValue) {
+                              // setState(() {
+                              //   selectedValue = newValue;
+                              // });
                               setState(() {
                                 selectedValue = newValue;
+                                bankName = value!
+                                    .firstWhere(
+                                      (item) => item.bankCode == newValue,
+                                      orElse: () => Bank(
+                                        bankCode: '',
+                                        bankName: '',
+                                      ), // Provide a default BankItem here
+                                    )
+                                    .bankName;
                               });
                             },
                             items: value!
@@ -256,6 +274,20 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                             ],
                           ),
                         );
+                } else if (data?.statusCode == 500 && data!.statusCode! < 600) {
+                  return Center(
+                    child: AppErrorWidget(
+                      errorData: data.data,
+                      errorCode: data.statusCode,
+                      retry: CustomButton(
+                        thickLine: 1,
+                        text: 'Retry',
+                        onpressed: () => ref.refresh(
+                          getAllBanksProvider,
+                        ),
+                      ),
+                    ),
+                  );
                 } else {
                   return Center(
                     child: AppErrorWidget(
@@ -309,6 +341,8 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                     validAccountNumber == 'incorrect' ||
                     value.length != 10) {
                   return 'No account was found for this number';
+                } else if (validAccountNumber == 'unavailable') {
+                  return 'Withdrawal is currently unavailable.\nWe apologize for any inconvenience.';
                 }
                 return null;
               },
@@ -328,6 +362,10 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                           setState(() {
                             accountName = value.data['accountName'];
                             validAccountNumber = '';
+                          });
+                        } else if (value.statusCode == 503) {
+                          setState(() {
+                            validAccountNumber = 'unavailable';
                           });
                         } else {
                           setState(() {
@@ -370,44 +408,6 @@ class _WithDrawalSavingsState extends ConsumerState<WithDrawalSavings> {
                   },
                 );
               },
-            ),
-            25.verticalSpace,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Text(
-                'Amount',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                  color: LandColors.textColorVeryBlack,
-                ),
-              ),
-            ),
-            12.verticalSpace,
-            CustomTextInput(
-              validator: (value) {
-                // Parse the entered amount to a double
-
-                if (value == null || value.isEmpty) {
-                  return 'Enter the amount';
-                }
-                double enteredAmount = double.tryParse(value) ?? 0.0;
-                double savingsAmount = double.tryParse(widget.amount) ?? 0.0;
-                // Compare with widget.amount
-                if (enteredAmount > savingsAmount) {
-                  return 'Amount cannot be greater than the savings account balance';
-                }
-
-                return null;
-              },
-              controller: amount,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              suffixText: 'NGN',
-              hintText: 'Enter amount',
-              inputFormatters: [
-                MoneyTextFormatter(),
-              ],
             ),
             25.verticalSpace,
             Padding(

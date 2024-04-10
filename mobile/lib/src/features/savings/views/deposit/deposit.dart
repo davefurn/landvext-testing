@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/create_providus.dart';
 
 class Deposit extends StatefulWidget {
   const Deposit({required this.id, Key? key}) : super(key: key);
@@ -89,59 +90,6 @@ class _DepositState extends State<Deposit> {
                   ),
                 ),
                 12.verticalSpace,
-                // InkWell(
-                //   onTap: () {
-                //     setState(() {
-                //       selectedValue = 2;
-                //     });
-                //   },
-                //   child: RadioListTile(
-                //     activeColor: LandColors.tileBlue,
-                //     selectedTileColor: LandColors.tileActiveShade,
-                //     selected: selectedValue == 2 ? true : false,
-                //     dense: true,
-                //     value: 2,
-                //     groupValue: selectedValue,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         selectedValue = value!;
-                //       });
-                //     },
-                //     title: Row(
-                //       children: [
-                //         Text(
-                //           'Card',
-                //           style: TextStyle(
-                //             fontSize: 14.sp,
-                //             fontWeight: FontWeight.w400,
-                //             color: LandColors.tileTextColor,
-                //           ),
-                //         ),
-                //         const Spacer(),
-                //         Image.asset(
-                //           LandAssets.visa,
-                //           width: 39.w,
-                //           height: 12.h,
-                //         ),
-                //         16.horizontalSpace,
-                //         Image.asset(
-                //           LandAssets.mastercard,
-                //           width: 26.w,
-                //           height: 16.h,
-                //         ),
-                //       ],
-                //     ),
-                //     shape: RoundedRectangleBorder(
-                //       side: BorderSide(
-                //         color: selectedValue == 2
-                //             ? LandColors.tileBlue
-                //             : LandColors.tileGrey,
-                //       ),
-                //       borderRadius: BorderRadius.circular(4.r),
-                //     ),
-                //   ),
-                // ),
-                // 12.verticalSpace,
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -206,7 +154,7 @@ class _DepositState extends State<Deposit> {
                       setState(() {
                         state = LoadingState.loading;
                       });
-                      await PostRequest.createProvidus(
+                      await PostRequestCreateProvidus.createProvidus(
                         context,
                         id: int.tryParse(widget.id),
                       );

@@ -1,5 +1,7 @@
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/reset_password.dart';
+import 'package:landvext/src/features/authentication/forgotPassword/widgets/back_button.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_password.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -29,7 +31,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.resetPassword(
+    await PostRequestResetPassword.resetPassword(
       context,
       confirmPassword: confirmController.text,
       password: passwordController.text,
@@ -58,28 +60,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                  vertical: 77.6.h,
-                ).copyWith(bottom: 0.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        context.pop();
-                      },
-                      child: SvgPicture.asset(
-                        LandAssets.backThree,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 47.936.h,
-                      width: 47.936.w,
-                    ),
-                  ],
-                ),
+              BackButtonss(
+                ontap: () {
+                  context.pop();
+                },
               ),
               31.56.verticalSpace,
               Texts(
@@ -92,78 +76,28 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
               ),
               50.verticalSpace,
-              CustomTextInput(
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                validator: (v) {
-                  if (v == null || v.isEmpty || v.trim().length < 8) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_character_size',
-                    );
-                  } else if (!LandConstants.checkLettersregEx.hasMatch(v)) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_cases',
-                    );
-                  }
-                  return null; // to indicate a success
+              LoginPasswordInput(
+                submitted: submitted,
+                translate: translate,
+                passwordController: passwordController,
+                isVisible: isVisible,
+                onpressed: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
                 },
-                controller: passwordController,
-                hintText: translate('authentication:login_textfield_password'),
-                obscureText: isVisible,
-                keyboardType: TextInputType.visiblePassword,
-                suffixIcon: IconButton(
-                  splashColor: LandColors.transparent,
-                  highlightColor: LandColors.transparent,
-                  iconSize: 18.sp,
-                  icon: Icon(
-                    isVisible ? Icons.visibility : Icons.visibility_off,
-                    color: LandColors.textColorHintGrey,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                ),
               ),
               12.verticalSpace,
-              CustomTextInput(
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                validator: (v) {
-                  if (v == null || v.isEmpty || v.trim().length < 8) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_character_size',
-                    );
-                  } else if (!LandConstants.checkLettersregEx.hasMatch(v)) {
-                    return translate(
-                      'authentication:login_textfield_password_validation_cases',
-                    );
-                  }
-                  return null; // to indicate a success
+              LoginPasswordInput(
+                submitted: submitted,
+                translate: translate,
+                passwordController: confirmController,
+                isVisible: isVisible,
+                onpressed: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
                 },
-                controller: confirmController,
-                hintText: translate(
-                  'authentication:forgot_password_textfield_confirm_password',
-                ),
-                obscureText: isVisible,
-                keyboardType: TextInputType.visiblePassword,
-                suffixIcon: IconButton(
-                  splashColor: LandColors.transparent,
-                  highlightColor: LandColors.transparent,
-                  iconSize: 18.sp,
-                  icon: Icon(
-                    isVisible ? Icons.visibility : Icons.visibility_off,
-                    color: LandColors.textColorHintGrey,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isVisible = !isVisible;
-                    });
-                  },
-                ),
               ),
               16.verticalSpace,
               Padding(
@@ -176,7 +110,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   state: state,
                   onTap: () {
                     setState(() => submitted = true);
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate() &&
+                        confirmController.text == passwordController.text) {
                       FocusManager.instance.primaryFocus?.unfocus();
                       confirmPassword();
                     }

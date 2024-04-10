@@ -1,6 +1,6 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});

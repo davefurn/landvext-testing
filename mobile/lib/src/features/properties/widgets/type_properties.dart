@@ -1,5 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/widgets/special_button_2.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/widgets/special_button_2.dart';
 
 class TypeProperties extends StatefulWidget {
   const TypeProperties({

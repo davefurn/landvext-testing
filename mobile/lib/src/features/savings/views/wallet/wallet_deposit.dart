@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_bool_literals_in_conditional_expressions
 
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/create_wallet_providus.dart';
 
 class WalletDeposit extends StatefulWidget {
   const WalletDeposit({Key? key}) : super(key: key);
@@ -40,59 +41,6 @@ class _WalletDepositState extends State<WalletDeposit> {
             16.verticalSpace,
             Column(
               children: [
-                // InkWell(
-                //   onTap: () {
-                //     setState(() {
-                //       selectedValue = 1;
-                //     });
-                //   },
-                //   child: RadioListTile(
-                //     activeColor: LandColors.tileBlue,
-                //     selectedTileColor: LandColors.tileActiveShade,
-                //     selected: selectedValue == 1 ? true : false,
-                //     dense: true,
-                //     value: 1,
-                //     groupValue: selectedValue,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         selectedValue = value!;
-                //       });
-                //     },
-                //     title: Row(
-                //       children: [
-                //         Text(
-                //           'Card',
-                //           style: TextStyle(
-                //             fontSize: 14.sp,
-                //             fontWeight: FontWeight.w400,
-                //             color: LandColors.tileTextColor,
-                //           ),
-                //         ),
-                //         const Spacer(),
-                //         Image.asset(
-                //           LandAssets.visa,
-                //           width: 39.w,
-                //           height: 12.h,
-                //         ),
-                //         16.horizontalSpace,
-                //         Image.asset(
-                //           LandAssets.mastercard,
-                //           width: 26.w,
-                //           height: 16.h,
-                //         ),
-                //       ],
-                //     ),
-                //     shape: RoundedRectangleBorder(
-                //       side: BorderSide(
-                //         color: selectedValue == 1
-                //             ? LandColors.tileBlue
-                //             : LandColors.tileGrey,
-                //       ),
-                //       borderRadius: BorderRadius.circular(4.r),
-                //     ),
-                //   ),
-                // ),
-                // 12.verticalSpace,
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -148,13 +96,12 @@ class _WalletDepositState extends State<WalletDeposit> {
                     'onboarding:text_onboarding_page_next',
                   ),
                   onTap: () async {
-                    if (selectedValue == 1) {
-                      context.goNamed(AppRoutes.cardDeposit.name);
-                    } else if (selectedValue == 2) {
+                    if (selectedValue == 2) {
                       setState(() {
                         state = LoadingState.loading;
                       });
-                      await PostRequest.createWalletProvidus(
+                      await PostRequestCreateWalletProvidus
+                          .createWalletProvidus(
                         context,
                       );
                       setState(() {

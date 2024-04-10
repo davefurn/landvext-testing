@@ -1,5 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/home/model/paginations_model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/home/model/paginations_model.dart';
 
 class GetRequest {
   static final NetworkService network = NetworkService();

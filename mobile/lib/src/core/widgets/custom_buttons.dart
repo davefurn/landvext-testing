@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -94,7 +94,7 @@ class CustomButton extends StatelessWidget {
                     fontSize: fontSize.sp,
                     color: textcolor ?? LandColors.backgroundColour,
                     fontWeight: fontWeight,
-                     letterSpacing: -0.2,
+                    letterSpacing: -0.2,
                   ),
                 ),
               ),

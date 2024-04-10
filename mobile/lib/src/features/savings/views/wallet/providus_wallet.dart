@@ -1,5 +1,6 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/savings/views/wallet/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/create_wallet_providus.dart';
+import 'package:landvext/src/features/savings/views/wallet/model/model.dart';
 
 class ProvidusWallet extends StatefulWidget {
   const ProvidusWallet({super.key});
@@ -19,7 +20,7 @@ class _ProvidusWalletState extends State<ProvidusWallet> {
   }
 
   Future<void> _asyncMethod() async {
-    await PostRequest.createWalletProvidus(
+    await PostRequestCreateWalletProvidus.createWalletProvidus(
       context,
     );
   }

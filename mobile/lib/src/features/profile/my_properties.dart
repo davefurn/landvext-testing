@@ -1,11 +1,11 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class MyProperties extends StatelessWidget {
   const MyProperties({super.key});
 
   @override
-  Widget build(BuildContext context) =>  Scaffold(
-     appBar: CustomAppbar(
+  Widget build(BuildContext context) => Scaffold(
+        appBar: CustomAppbar(
           widget: const SizedBox.shrink(),
           translate: 'My Properties',
           appBar: AppBar(),
@@ -18,5 +18,5 @@ class MyProperties extends StatelessWidget {
             fit: BoxFit.contain,
           ),
         ),
-  );
+      );
 }

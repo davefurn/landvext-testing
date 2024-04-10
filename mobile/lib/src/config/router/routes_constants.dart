@@ -10,13 +10,9 @@ enum AppRoutes {
   ),
   goalCreation(
     name: 'goalCreation',
-    path: 'goalCreation',
+    path: '/goalCreation',
   ),
-  sell(
-    name: 'sell',
-    path: 'sell',
-  ),
-    properties(
+  properties(
     name: 'properties',
     path: 'properties',
   ),
@@ -24,44 +20,62 @@ enum AppRoutes {
     name: 'deleteAccount',
     path: 'deleteAccount',
   ),
-    requestDeleteAccount(
+  extend(
+    name: 'extend',
+    path: 'extend',
+  ),
+  coown(
+    name: 'coown',
+    path: 'coown',
+  ),
+  requestDeleteAccount(
     name: 'requestDeleteAccount',
     path: 'requestDeleteAccount',
   ),
-    myProperties(
+  myProperties(
     name: 'myProperties',
     path: 'myProperties',
   ),
   withdrawalSavings(
     name: 'withdrawalSavings',
-    path: 'withdrawalSavings/:amount/:surcharge',
+    path: 'withdrawalSavings/:amount/:surcharge/:id',
+  ),
+  otpWithDrawal(
+    name: 'otpWithDrawal',
+    path: 'otpWithDrawal/:externalTrans/:route',
   ),
   withdrawalReceipt(
     name: 'withdrawalReceipt',
     path: 'withdrawalReceipt',
   ),
+  sell(
+    name: 'sell',
+    path: 'sell',
+  ),
   saved(
     name: 'saved',
     path: 'saved',
   ),
-   privacy(
+  privacy(
     name: 'privacy',
     path: 'privacy',
   ),
-   feedback(
+  feedback(
     name: 'feedback',
     path: 'feedback',
   ),
 
-
-
   history(
     name: 'history',
-    path: 'history',
+    path: '/history',
+  ),
+  outright(
+    name: 'outright',
+    path: 'outright',
   ),
   historyMore(
     name: 'historyMore',
-    path: 'historyMore',
+    path: '/historyMore',
   ),
   providus(
     name: 'providus',
@@ -97,7 +111,7 @@ enum AppRoutes {
   ),
   referral(
     name: 'referral',
-    path: 'referral/:referralPoint',
+    path: '/referral/:referralPoint',
   ),
   inputAmountDeposit(
     name: 'inputAmountDeposit',

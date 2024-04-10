@@ -1,7 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/home/model/user_model.dart';
-import 'package:landvest/src/features/savings/views/wallet/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/home/model/user_model.dart';
+import 'package:landvext/src/features/savings/views/wallet/model/model.dart';
+import 'package:landvext/src/features/savings/views/withdrawal/model/receipt.dart';
 
 class LocalStorage {
   LocalStorage._init();
@@ -24,18 +25,27 @@ class LocalStorage {
   final String referralCode = 'referralCode';
   final String currentBalance = '0';
   final String referralPoints = 'referralPoints';
-  Future<void> setSignUpProcess() async =>
-      _secureStorage.write(key: signUpProcess, value: 'true');
+  final String bank = 'bank';
+  final String bankAmount = 'bankAmount';
+  final String date = 'date';
+  final String time = 'time';
+  Future<void> setBank(String value) async =>
+      _secureStorage.write(key: bank, value: value);
 
-  Future<bool> getSignUpProcess() async {
-    var isNotSignUpProcess =
-        await _secureStorage.read(key: signUpProcess) == null;
-    if (isNotSignUpProcess) {
-      await setSignUpProcess();
-      return false;
-    }
-    return true;
-  }
+  Future<String?> getBank() async => _secureStorage.read(key: bank);
+  Future<void> setBankAmount(String value) async =>
+      _secureStorage.write(key: bankAmount, value: value);
+
+  Future<String?> getBankAmount() async => _secureStorage.read(key: bankAmount);
+
+  Future<void> setDate(String value) async =>
+      _secureStorage.write(key: date, value: value);
+
+  Future<String?> getDate() async => _secureStorage.read(key: date);
+  Future<void> setTime(String value) async =>
+      _secureStorage.write(key: time, value: value);
+
+  Future<String?> getTime() async => _secureStorage.read(key: time);
 
   Future<void> setFirstTime() async =>
       _secureStorage.write(key: firstTime, value: 'true');
@@ -115,6 +125,33 @@ class LocalStorage {
       _secureStorage.write(key: resetToken, value: value);
 
   Future<String?> getResetToken() async => _secureStorage.read(key: resetToken);
+
+  Future<void> saveBankTransaction(BankTransaction bankTransaction) async {
+    await setBank(bankTransaction.bank);
+    await setAccountNumber(bankTransaction.accountNumber);
+    await setAccountName(bankTransaction.accountName);
+    await setBankAmount(bankTransaction.amount.toString());
+    await setDate(bankTransaction.date);
+    await setTime(bankTransaction.time);
+  }
+
+  Future<BankTransaction> getBankTransaction() async {
+    var bank_ = await getBank();
+    var accountNumber_ = await getAccountNumber();
+    var accountName_ = await getAccountName();
+    var amount_ = await getBankAmount();
+    var date_ = await getDate();
+    var time_ = await getTime();
+
+    return BankTransaction(
+      bank: bank_ ?? '',
+      accountName: accountName_ ?? '',
+      accountNumber: accountNumber_ ?? '',
+      date: date_ ?? '',
+      time: time_ ?? '',
+      amount: double.parse(amount_ ?? '0.0'),
+    );
+  }
 
   Future<void> saveUserData(LoginData data) async {
     await setAccessToken(data.token.accessToken);

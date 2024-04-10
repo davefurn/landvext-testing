@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/request_otp_delete.dart';
 
 class DeleteAccount extends StatefulWidget {
   const DeleteAccount({super.key});
@@ -23,7 +24,7 @@ class _DeleteAccountState extends State<DeleteAccount> {
       state = LoadingState.loading;
     });
 
-    await PostRequest.requestOtpDelete(
+    await PostRequestRequestOtpDelete.requestOtpDelete(
       context,
     );
     setState(() {

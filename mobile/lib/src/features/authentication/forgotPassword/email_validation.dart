@@ -1,7 +1,9 @@
 import 'dart:async';
-
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/email_sent_signup.dart';
+import 'package:landvext/src/core/services/postRequests/requests/verify_email.dart';
+import 'package:landvext/src/features/authentication/forgotPassword/widgets/back_button.dart';
+import 'package:landvext/src/features/authentication/forgotPassword/widgets/count_down.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class EmailValidation extends StatefulWidget {
@@ -69,7 +71,7 @@ class _EmailValidationState extends State<EmailValidation> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.verifyEmail(
+    await PostRequestVerifyEmail.verifyEmail(
       context,
       email: email,
       passwordResetToken: textEditingController.text,
@@ -80,14 +82,8 @@ class _EmailValidationState extends State<EmailValidation> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     errorController.close();
-
     super.dispose();
   }
 
@@ -101,28 +97,10 @@ class _EmailValidationState extends State<EmailValidation> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 77.6.h,
-              ).copyWith(bottom: 0.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      context.goNamed(AppRoutes.logIn.name);
-                    },
-                    child: SvgPicture.asset(
-                      LandAssets.backThree,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 47.936.h,
-                    width: 47.936.w,
-                  ),
-                ],
-              ),
+            BackButtonss(
+              ontap: () {
+                context.goNamed(AppRoutes.logIn.name);
+              },
             ),
             31.56.verticalSpace,
             Texts(
@@ -205,35 +183,10 @@ class _EmailValidationState extends State<EmailValidation> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        translate('authentication:email_validation_timer'),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: LandColors.textColorHintGrey,
-                              fontSize: 15.978666305541992.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                      ),
-                      if (timerActive && countdown != 0)
-                        Text(
-                          countdown < 10 ? '00:0$countdown' : '00:$countdown',
-                          style: TextStyle(
-                            color: LandColors.textColorHintGrey,
-                            fontSize: 15.978666305541992.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        )
-                      else
-                        Text(
-                          '00:0$countdown',
-                          style: TextStyle(
-                            color: LandColors.textColorHintGrey,
-                            fontSize: 15.978666305541992.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                    ],
+                  CountDown(
+                    translate: translate,
+                    timerActive: timerActive,
+                    countdown: countdown,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -245,7 +198,7 @@ class _EmailValidationState extends State<EmailValidation> {
                               countdown = 60;
                             });
 
-                            await PostRequest.emailSentSignUp(
+                            await PostRequestEmailSentSignUp.emailSentSignUp(
                               context,
                               email: email,
                             ).then((value) {

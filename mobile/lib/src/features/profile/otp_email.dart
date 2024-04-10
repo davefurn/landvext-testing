@@ -1,6 +1,8 @@
 import 'dart:async';
-
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/email_sent.dart';
+import 'package:landvext/src/core/services/postRequests/requests/verify_email.dart';
+import 'package:landvext/src/features/profile/widgets/timer_profile.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpEmailProfile extends StatefulWidget {
@@ -26,7 +28,7 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
   void initState() {
     super.initState();
     textEditingController = TextEditingController();
-  
+
     errorController = StreamController<ErrorAnimationType>();
     LocalStorage.instance.getEmail().then((value) {
       email = '$value';
@@ -68,7 +70,7 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.verifyEmail(
+    await PostRequestVerifyEmail.verifyEmail(
       context,
       email: email,
       passwordResetToken: textEditingController.text,
@@ -78,7 +80,6 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
     });
   }
 
- 
   @override
   void dispose() {
     errorController.close();
@@ -189,36 +190,10 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Text(
-                          translate('authentication:email_validation_timer'),
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: LandColors.textColorHintGrey,
-                                    fontSize: 15.978666305541992.sp,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                        ),
-                        if (timerActive && countdown != 0)
-                          Text(
-                            countdown < 10 ? '00:0$countdown' : '00:$countdown',
-                            style: TextStyle(
-                              color: LandColors.textColorHintGrey,
-                              fontSize: 15.978666305541992.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          )
-                        else
-                          Text(
-                            '00:0$countdown',
-                            style: TextStyle(
-                              color: LandColors.textColorHintGrey,
-                              fontSize: 15.978666305541992.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                      ],
+                    TimerProfile(
+                      translate: translate,
+                      timerActive: timerActive,
+                      countdown: countdown,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -226,7 +201,7 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
                         InkWell(
                           onTap: () async {
                             if (countdown == 0) {
-                              await PostRequest.emailSent(
+                              await PostRequestEmailSent.emailSent(
                                 context,
                                 reSend: true,
                                 email: email,
@@ -286,7 +261,6 @@ class _OtpEmailProfileState extends State<OtpEmailProfile> {
                   },
                 ),
               ),
-            
             ],
           ),
         ),

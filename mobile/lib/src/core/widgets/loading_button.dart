@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class LoadingButton extends StatefulWidget {
   const LoadingButton({
@@ -35,17 +35,16 @@ class _LoadingButtonState extends State<LoadingButton> {
         ),
         color: widget.color ?? LandColors.mainColor,
         minWidth: widget.width ?? MediaQuery.of(context).size.width * 0.9,
-        
         height: 48.h,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
           child: widget.state == LoadingState.loading
               ? SizedBox(
-                  width: 20.w,
-                  height: 20.h,
+                  width: 12.w,
+                  height: 12.h,
                   child: CircularProgressIndicator(
                     backgroundColor: widget.color ?? LandColors.mainColor,
-                    strokeWidth: 3.w,
+                    strokeWidth: 2.w,
                     color: LandColors.backgroundColour,
                   ),
                 )

@@ -1,11 +1,9 @@
-// ignore_for_file: unnecessary_lambdas
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/core/services/get_requests.dart';
-import 'package:landvest/src/core/widgets/app_error.dart';
-import 'package:landvest/src/features/savings/model/goal.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/providers.dart';
+import 'package:landvext/src/core/services/get_requests.dart';
+import 'package:landvext/src/core/widgets/app_error.dart';
+import 'package:landvext/src/features/savings/model/goal.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -108,8 +106,6 @@ class _SavingsState extends ConsumerState<Savings> {
                           onRefresh: () async {
                             value!.clear();
                             setState(() {});
-                            //   paginationModel.page = 1;
-                            //   paginationModel.total = 100;
                             var _ = ref.refresh(goalsProvider);
                             refreshController.refreshCompleted();
                           },
@@ -148,6 +144,9 @@ class _SavingsState extends ConsumerState<Savings> {
                               String fullString = value![index].withdrawalDate;
                               String datePart = fullString.substring(0, 10);
                               String progressss = progress.toStringAsFixed(2);
+                              double progressDouble = progress * 100;
+                              String progressString =
+                                  progressDouble.toStringAsFixed(2);
 
                               return InkWell(
                                 onTap: () {
@@ -190,9 +189,9 @@ class _SavingsState extends ConsumerState<Savings> {
                                       LinearPercentIndicator(
                                         width: 250.w,
                                         trailing: Text(
-                                          double.parse(progressss) > 1.0
+                                          double.parse(progressss) >= 1.0
                                               ? '100%'
-                                              : '$progressss%',
+                                              : '$progressString%',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             color: const Color(0xFF64748B),
@@ -381,6 +380,8 @@ class _SavingsState extends ConsumerState<Savings> {
                 errorData: data?.data,
                 errorCode: data?.statusCode,
                 retry: CustomButton(
+                  color: LandColors.mainColor,
+                  textcolor: LandColors.backgroundColour,
                   thickLine: 1,
                   text: 'Retry',
                   onpressed: () => ref.refresh(

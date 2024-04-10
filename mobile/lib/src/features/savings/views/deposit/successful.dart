@@ -1,5 +1,6 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/savings/views/wallet/model/model.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/validate_trans.dart';
+import 'package:landvext/src/features/savings/views/wallet/model/model.dart';
 
 class ProvidusSuccessful extends StatefulWidget {
   const ProvidusSuccessful({
@@ -29,7 +30,7 @@ class _ProvidusSuccessfulState extends State<ProvidusSuccessful> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.validateTrans(
+    await PostRequestValidateTrans.validateTrans(
       context,
       externalTransactionId: widget.accountProvidus.initiationTranRef,
       isWallet: bool.parse(widget.wallet.toString()),

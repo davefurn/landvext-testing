@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/authentication/widgets/text_input_emails.dart';
 
 class ChangeEmailProfile extends StatefulWidget {
   const ChangeEmailProfile({Key? key}) : super(key: key);
@@ -19,21 +20,6 @@ class _ChangeEmailProfileState extends State<ChangeEmailProfile> {
     email = TextEditingController();
   }
 
-  Future<void> changeEmail() async {
-    setState(() {
-      state = LoadingState.loading;
-    });
-    // await PostRequest.changeEmail(
-    //   context,
-    //   confirmPassword: confirmController.text,
-    //   password: passwordController.text,
-    // );
-
-    setState(() {
-      state = LoadingState.normal;
-    });
-  }
-
   @override
   void dispose() {
     email.dispose();
@@ -41,53 +27,44 @@ class _ChangeEmailProfileState extends State<ChangeEmailProfile> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: CustomAppbar(
-          translate: 'Email',
-          appBar: AppBar(),
-          widget: const SizedBox.shrink(),
-        ),
-        body: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              50.verticalSpace,
-              CustomTextInput(
-                controller: email,
-                autovalidateMode: submitted
-                    ? AutovalidateMode.onUserInteraction
-                    : AutovalidateMode.disabled,
-                validator: (v) {
-                  if (v == null || v.isEmpty) {
-                    return 'Enter your new email';
-                  } else if (!LandConstants.emailRegEx.hasMatch(v)) {
-                    return 'Enter valid email';
+  Widget build(BuildContext context) {
+    TranslateType translate = AppLocalizations.of(context)!.translate;
+    return Scaffold(
+      appBar: CustomAppbar(
+        translate: 'Email',
+        appBar: AppBar(),
+        widget: const SizedBox.shrink(),
+      ),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            50.verticalSpace,
+            LoginEmailInput(
+              translate: translate,
+              submitted: submitted,
+              emailController: email,
+            ),
+            16.verticalSpace,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: LoadingButton(
+                state: state,
+                color: LandColors.mainColor,
+                width: double.maxFinite,
+                text: 'Change Email',
+                onTap: () {
+                  setState(() => submitted = true);
+                  if (_formKey.currentState!.validate()) {
+                    FocusManager.instance.primaryFocus?.unfocus();
                   }
-                  return null; // to indicate a success
                 },
-                hintText: 'Enter new email',
-                keyboardType: TextInputType.emailAddress,
               ),
-              16.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: LoadingButton(
-                  state: state,
-                  color: LandColors.mainColor,
-                  width: double.maxFinite,
-                  text: 'Change Email',
-                  onTap: () {
-                    setState(() => submitted = true);
-                    if (_formKey.currentState!.validate()) {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      changeEmail();
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

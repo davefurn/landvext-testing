@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:flutter/widgets.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class EachInvestment extends StatelessWidget {
   const EachInvestment({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class EachInvestment extends StatelessWidget {
         ),
         body: ListView(
           children: [
+            10.verticalSpace,
             Container(
               height: 230.h,
               margin: EdgeInsets.symmetric(horizontal: 20.w),
@@ -58,16 +60,135 @@ class EachInvestment extends StatelessWidget {
                       ),
                     ],
                   ),
-                  9.verticalSpace,
+                ],
+              ),
+            ),
+            22.5.verticalSpace,
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
+              width: double.maxFinite,
+              padding: EdgeInsets.symmetric(
+                vertical: 15.h,
+                horizontal: 12.w,
+              ),
+              decoration: BoxDecoration(
+                color: LandColors.yellowButton,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.r),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
-                        Icons.person,
-                        size: 20.sp,
-                        color: LandColors.textColorHintGrey,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '20/50 plots available',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: LandColors.textColorNewGrey,
+                              letterSpacing: -0.28,
+                              height: 0,
+                            ),
+                          ),
+                          8.verticalSpace,
+                          Text(
+                            '₦2,300,000.00',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w800,
+                              color: LandColors.textColorNewGrey,
+                              height: 0,
+                              letterSpacing: -0.28,
+                            ),
+                          ),
+                        ],
                       ),
+                      SizedBox(
+                        height: 32.h,
+                        child: CustomButton(
+                          text: 'Purchase',
+                          onpressed: () {
+                            context.pushNamed(AppRoutes.outright.name);
+                          },
+                          thickLine: 1,
+                          radius: 50.r,
+                          width: 110.w,
+                          height: 32.h,
+                          hpD: 0.w,
+                          fontWeight: FontWeight.w400,
+                          borderColor: LandColors.ascentColor,
+                          color: LandColors.ascentColor,
+                          textcolor: LandColors.backgroundColour,
+                        ),
+                      ),
+                    ],
+                  ),
+                  15.verticalSpace,
+                  GestureDetector(
+                    onTap: () {
+                      context.pushNamed(AppRoutes.extend.name);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.map_outlined,
+                          size: 24.sp,
+                          color: LandColors.textColorVeryBlack,
+                        ),
+                        2.horizontalSpace,
+                        Text(
+                          'View Survey Plan',
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: LandColors.textColorVeryBlack,
+                            letterSpacing: -0.28,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            14.verticalSpace,
+            Container(
+              margin: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
+              width: double.maxFinite,
+              padding: EdgeInsets.symmetric(
+                vertical: 15.h,
+                horizontal: 12.w,
+              ),
+              decoration: BoxDecoration(
+                color: LandColors.quickLinksBlue,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(4.r),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        '1092 investors',
+                        '20/100 units available',
                         style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
@@ -76,45 +197,35 @@ class EachInvestment extends StatelessWidget {
                           height: 0,
                         ),
                       ),
+                      8.verticalSpace,
+                      Text(
+                        '₦300,000.00',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w800,
+                          color: LandColors.textColorNewGrey,
+                          height: 0,
+                          letterSpacing: -0.28,
+                        ),
+                      ),
                     ],
                   ),
-                  27.verticalSpace,
-                  Text(
-                    '₦2,500,000',
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      color: LandColors.textColorVeryBlack,
-                      fontWeight: FontWeight.w700,
-                      height: 0,
-                      letterSpacing: -0.48,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            22.5.verticalSpace,
-            Container(
-              width: double.maxFinite,
-              height: 29.h,
-              padding: EdgeInsets.only(
-                top: 6.h,
-                left: 22.84.w,
-                right: 191.16.w,
-                bottom: 6.h,
-              ),
-              decoration: const BoxDecoration(color: LandColors.yellowButton),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '24% Returns in 8 months',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: LandColors.ascentColor,
-                      fontSize: 14.sp,
+                  SizedBox(
+                    height: 32.h,
+                    child: CustomButton(
+                      text: 'Co-own',
+                      onpressed: () {
+                        context.pushNamed(AppRoutes.coown.name);
+                      },
+                      thickLine: 1,
+                      radius: 50.r,
+                      width: 103.w,
+                      height: 32.h,
+                      hpD: 0.w,
                       fontWeight: FontWeight.w500,
-                      height: 0,
-                      letterSpacing: -0.28,
+                      borderColor: LandColors.mainColor,
+                      color: LandColors.mainColor,
+                      textcolor: LandColors.backgroundColour,
                     ),
                   ),
                 ],
@@ -166,23 +277,31 @@ class EachInvestment extends StatelessWidget {
                 ),
               ),
             ),
-            12.77.verticalSpace,
-            CustomButton(
-              text: 'Invest',
-              onpressed: () {
-                context.goNamed(AppRoutes.buyInvestment.name);
-              },
-              thickLine: 1,
-              radius: 4.r,
-              width: double.maxFinite,
-              height: 48.h,
-              hpD: 20.w,
-              fontWeight: FontWeight.w500,
-              borderColor: LandColors.transparent,
-              color: LandColors.mainColor,
-              textcolor: LandColors.backgroundColour,
+            10.verticalSpace,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: SizedBox(
+                height: 72.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (context, index) => Container(
+                    height: 72.h,
+                    width: 72.w,
+                    margin: EdgeInsets.only(
+                      left: 10.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: LandColors.textColorHint,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4.r),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
-            100.verticalSpace,
+            50.verticalSpace,
           ],
         ),
       );

@@ -1,5 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/widgets/special_button_2.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/widgets/special_button_2.dart';
 
 class TypeHistory extends StatefulWidget {
   const TypeHistory({
@@ -17,24 +17,22 @@ class _TypeHistoryState extends State<TypeHistory> {
   @override
   Widget build(BuildContext context) => Wrap(
         spacing: 8.w,
-        children: [
+        children: <HistoryTransaction>[
           HistoryTransaction.all,
           HistoryTransaction.saving,
           HistoryTransaction.properties,
         ].map((e) {
           late String text;
 
-          switch (e) {
-            case HistoryTransaction.all:
-              text = 'All';
-              break;
-            case HistoryTransaction.saving:
-              text = 'Savings';
-              break;
-            case HistoryTransaction.properties:
-              text = 'Properties';
-              break;
-          }
+          // Mapping each enum value to its corresponding text
+          final textMap = {
+            HistoryTransaction.all: 'All',
+            HistoryTransaction.saving: 'Savings',
+            HistoryTransaction.properties: 'Properties',
+          };
+
+          text = textMap[e]!;
+
           return SpecialButton2(
             onTap: () {
               setState(() => value = e);

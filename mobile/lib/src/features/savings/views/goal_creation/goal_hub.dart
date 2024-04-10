@@ -1,11 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/services/get_requests.dart';
-import 'package:landvest/src/core/widgets/dialog_boxes.dart';
-
-import 'package:landvest/src/features/savings/model/goal.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/get_requests.dart';
+import 'package:landvext/src/features/savings/model/goal.dart';
+import 'package:landvext/src/features/savings/widgets/dashboard_savings.dart';
+import 'package:landvext/src/features/savings/widgets/description_widget.dart';
+import 'package:landvext/src/features/savings/widgets/suffix_percent.dart';
+import 'package:landvext/src/features/savings/widgets/target_widget.dart';
+import 'package:landvext/src/features/savings/widgets/time_widget.dart';
+import 'package:landvext/src/features/savings/widgets/wallet_widget.dart';
+import 'package:landvext/src/features/savings/widgets/withdraw_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -117,71 +121,10 @@ class _GoalHubState extends ConsumerState<GoalHub> {
           child: Column(
             children: [
               18.verticalSpace,
-              Container(
-                height: 167.h,
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                decoration: BoxDecoration(
-                  color: LandColors.transparent,
-                  image: DecorationImage(
-                    image: assetsI,
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                child: Stack(
-                  children: [
-                    Center(
-                      child: Text(
-                        NumberFormat.currency(
-                          symbol: '₦',
-                          decimalDigits: 2,
-                        ).format(widget.goal.currentBalance),
-                        style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Container(
-                        height: 31.h,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 8.h,
-                        ),
-                        margin: EdgeInsets.only(
-                          left: 4.w,
-                          right: 119.w,
-                          bottom: 5.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4.r),
-                          color: LandColors.backgroundColour.withOpacity(.10),
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Withdrawal Date:',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Text(
-                              datePart,
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              DashBoardSavings(
+                assetsI: assetsI,
+                goal: widget.goal.currentBalance,
+                datePart: datePart,
               ),
               11.verticalSpace,
               Align(
@@ -190,47 +133,7 @@ class _GoalHubState extends ConsumerState<GoalHub> {
                   onTap: () {
                     context.pushNamed(AppRoutes.wallet.name);
                   },
-                  child: Container(
-                    width: 100.w,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 5.w,
-                      vertical: 5.h,
-                    ),
-                    margin: EdgeInsets.only(
-                      right: 20.w,
-                    ),
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: LandColors.inAppHint,
-                        ),
-                        borderRadius: BorderRadius.circular(50.r),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          LandAssets.wallet,
-                          colorFilter: const ColorFilter.mode(
-                            LandColors.textColorVeryBlack,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        10.horizontalSpace,
-                        Text(
-                          'Wallet',
-                          style: TextStyle(
-                            color: LandColors.textColorVeryBlack,
-                            fontSize: 14.sp,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: -0.28,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: const WalletWidget(),
                 ),
               ),
               29.verticalSpace,
@@ -245,317 +148,31 @@ class _GoalHubState extends ConsumerState<GoalHub> {
                     progress == 1.0 ? LandColors.green : LandColors.ascentColor,
               ),
               4.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '$currentAmount/$totalAmount',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: LandColors.textColorGrey,
-                      ),
-                    ),
-                    Text(
-                      '${progresssss.toStringAsFixed(10)}%',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: LandColors.textColorGrey,
-                      ),
-                    ),
-                  ],
-                ),
+              SuffixPercentage(
+                currentAmount: currentAmount,
+                totalAmount: totalAmount,
+                progresssss: progresssss,
               ),
               34.verticalSpace,
-              Container(
-                width: double.maxFinite,
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
-                decoration: BoxDecoration(
-                  color: LandColors.textColorHint,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Description',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w700,
-                        color: LandColors.textColorVeryBlack,
-                      ),
-                    ),
-                    16.verticalSpace,
-                    Text(
-                      widget.goal.shortDescription ?? 'Nothing',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: LandColors.textColorVeryBlack,
-                      ),
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
+              DescriptionHub(
+                description: widget.goal.shortDescription,
               ),
               12.verticalSpace,
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: LandColors.textColorHint,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          LandAssets.bulls,
-                          width: 16.666667938232422.w,
-                          height: 16.666667938232422.h,
-                          colorFilter: ColorFilter.mode(
-                            progress == 1.0
-                                ? LandColors.green
-                                : LandColors.redActive,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        2.horizontalSpace,
-                        Text(
-                          'Target:',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: progress == 1.0
-                                ? LandColors.green
-                                : LandColors.redActive,
-                          ),
-                        ),
-                      ],
-                    ),
-                    16.verticalSpace,
-                    Row(
-                      children: [
-                        Text(
-                          currentAmount,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: LandColors.textColorVeryBlack,
-                          ),
-                        ),
-                        4.horizontalSpace,
-                        Text(
-                          'out of',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: LandColors.textGrey,
-                          ),
-                        ),
-                        4.horizontalSpace,
-                        Text(
-                          totalAmount,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: LandColors.textColorVeryBlack,
-                          ),
-                        ),
-                        4.horizontalSpace,
-                        Text(
-                          'saved',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: LandColors.textGrey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              TargetWidget(
+                progress: progress,
+                currentAmount: currentAmount,
+                totalAmount: totalAmount,
               ),
               12.verticalSpace,
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: LandColors.textColorHint,
-                  ),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          LandAssets.clock,
-                          width: 16.666667938232422.w,
-                          height: 16.666667938232422.h,
-                          colorFilter: ColorFilter.mode(
-                            progress == 1.0
-                                ? LandColors.green
-                                : LandColors.redActive,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                        2.horizontalSpace,
-                        Text(
-                          'Time:',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: progress == 1.0
-                                ? LandColors.green
-                                : LandColors.redActive,
-                          ),
-                        ),
-                      ],
-                    ),
-                    16.verticalSpace,
-                    Row(
-                      children: [
-                        Text(
-                          formattedDifference,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: LandColors.textColorVeryBlack,
-                          ),
-                        ),
-                        4.horizontalSpace,
-                        Text(
-                          'remaining',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                            color: LandColors.textGrey,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+              TimeWidget(
+                progress: progress,
+                formattedDifference: formattedDifference,
               ),
               42.verticalSpace,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
-                child: Row(
-                  children: [
-                    CustomButton(
-                      text: 'Withdraw',
-                      onpressed: progress == 1.0
-                          ? () => showDialog(
-                                context: context,
-                                builder: (context) => DialogBoxes(
-                                  notButton: false,
-                                  icon: SvgPicture.asset(
-                                    LandAssets.alert,
-                                  ),
-                                  text:
-                                      'Are you sure you want to withdraw your rent savings?',
-                                  buttonOnePressed: () {
-                                    context.pop();
-                                  },
-                                  buttonTwoPressed: () {
-                                    context
-                                      ..pop()
-                                      ..pushNamed(
-                                        AppRoutes.withdrawalSavings.name,
-                                        pathParameters: {
-                                          'amount': currentAmount,
-                                          'surcharge': 'false',
-                                        },
-                                      );
-                                  },
-                                  buttonOneText: 'Cancel',
-                                  buttonTwoText: 'Yes',
-                                  buttonTwoColor: LandColors.mainColor,
-                                ),
-                              )
-                          : () => showDialog(
-                                context: context,
-                                builder: (context) => DialogBoxes(
-                                  notButton: false,
-                                  icon: SvgPicture.asset(
-                                    LandAssets.alert,
-                                  ),
-                                  text:
-                                      'Your withdrawal date isn’t due yet. Withdrawing now will attract a 10% charge. Proceed?',
-                                  buttonOnePressed: () {
-                                    context.pop();
-                                  },
-                                  buttonTwoPressed: () {
-                                    context
-                                      ..pop()
-                                      ..pushNamed(
-                                        AppRoutes.withdrawalSavings.name,
-                                        pathParameters: {
-                                          'amount': currentAmount,
-                                          'surcharge': 'true',
-                                        },
-                                      );
-                                  },
-                                  buttonOneText: 'Cancel',
-                                  buttonTwoText: 'Yes',
-                                  buttonTwoColor: LandColors.redActive,
-                                ),
-                              ),
-                      thickLine: 1,
-                      radius: 4.r,
-                      width: 162.5.w,
-                      height: 48.h,
-                      hpD: 0.w,
-                      fontWeight: FontWeight.w500,
-                      borderColor: LandColors.transparent,
-                      color: progress == 1.0
-                          ? LandColors.yellowButton
-                          : LandColors.textColorHint,
-                      textcolor: progress == 1.0
-                          ? LandColors.yellowButtonText
-                          : LandColors.textColorGrey,
-                    ),
-                    10.horizontalSpace,
-                    CustomButton(
-                      text: 'Deposit',
-                      onpressed: () {
-                        context.pushNamed(
-                          AppRoutes.deposit.name,
-                          pathParameters: {'id': widget.goal.id.toString()},
-                        );
-                      },
-                      thickLine: 1,
-                      radius: 4.r,
-                      width: 162.5.w,
-                      height: 48.h,
-                      hpD: 0.w,
-                      fontWeight: FontWeight.w500,
-                      borderColor: LandColors.transparent,
-                      color: LandColors.mainColor,
-                      textcolor: LandColors.backgroundColour,
-                    ),
-                  ],
-                ),
+              WithDrawButton(
+                progress: progress,
+                currentAmount: currentAmount,
+                id: widget.goal.id,
               ),
               100.verticalSpace,
             ],

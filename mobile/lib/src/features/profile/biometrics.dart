@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/riverpod/providers.dart';
-import 'package:landvest/src/features/profile/widgets/switches.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/riverpod/biometrics/bio.dart';
+import 'package:landvext/src/features/profile/widgets/switches.dart';
 import 'package:local_auth/local_auth.dart';
 
 class Biometrics extends ConsumerWidget {

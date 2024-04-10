@@ -1,5 +1,5 @@
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({
@@ -35,7 +35,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   padding: EdgeInsets.only(left: 20.w),
                   child: Icon(
                     Icons.arrow_back_ios,
-                    size: 20.sp,
+                    size: 16.sp,
                   ),
                 ),
               )

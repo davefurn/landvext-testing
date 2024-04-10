@@ -34,7 +34,6 @@ class LandColors {
   static const quickLinksGreen = Color(0xffE8FAE6);
   static const quickLinksBlue = Color(0xffDBE8FE);
   static const quickLinksYellow = Color(0xffFEEAC7);
-  static const yellowDark = Color(0xffD98B06);
   static const dotGrey = Color(0xffD9D9D9);
   static const redColor = Color(0xff690722);
   static const redErrorColor = Color(0xffef4444);
@@ -42,9 +41,11 @@ class LandColors {
   static const textColorHintGrey = Color(0xffA3AEBD);
   static const peakBlack = Color(0xff000000);
   static const yellowSnack = Color(0xffFCBB4D);
+  static const yellowDark = Color(0xffD98B06);
   static const yellowborder = Color(0xffF59E0B);
   static const inAppHint = Color(0xffC9CFD8);
   static const textGrey = Color(0xff76859A);
+  static const greyCard = Color(0xffF4F7F4);
 
   static const yellowButtonText = Color(0xffCC5809);
   static const yellowButton = Color(0xffFEF0BF);

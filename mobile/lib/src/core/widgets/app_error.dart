@@ -1,7 +1,5 @@
-// ignore_for_file: avoid_dynamic_calls
-
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/core/functions/global_epired.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/functions/global_expired.dart';
 
 class AppErrorWidget extends StatefulWidget {
   const AppErrorWidget({
@@ -37,7 +35,7 @@ class _AppErrorWidgetState extends State<AppErrorWidget> {
     }
     if (widget.errorCode == 401) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        GlobalFunctions.expiredeSession(context);
+        GlobalFunctions.expiredSession(context);
       });
     }
   }

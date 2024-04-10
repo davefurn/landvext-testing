@@ -1,4 +1,4 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class Matured extends StatelessWidget {
   const Matured({Key? key}) : super(key: key);

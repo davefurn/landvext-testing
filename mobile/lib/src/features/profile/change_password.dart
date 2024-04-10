@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/change_password.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -27,7 +28,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.changePassword(
+    await PostRequestChangePassword.changePassword(
       context,
       confirmPassword: confirmPassword.text,
       newPassword: newPassword.text,

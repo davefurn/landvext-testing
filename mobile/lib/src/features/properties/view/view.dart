@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:landvest/src/core/constants/imports.dart';
-import 'package:landvest/src/features/properties/model/model.dart';
-import 'package:landvest/src/features/properties/widgets/properties_card.dart';
-import 'package:landvest/src/features/properties/widgets/properties_sold.dart';
-import 'package:landvest/src/features/properties/widgets/type_properties.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/features/properties/model/model.dart';
+import 'package:landvext/src/features/properties/widgets/properties_card.dart';
+import 'package:landvext/src/features/properties/widgets/properties_sold.dart';
+import 'package:landvext/src/features/properties/widgets/type_properties.dart';
 
 class Properties extends ConsumerStatefulWidget {
   const Properties({super.key});
@@ -13,9 +13,7 @@ class Properties extends ConsumerStatefulWidget {
 }
 
 class _PropertiesState extends ConsumerState<Properties> {
-  int currentIndex = 0;
-  
-
+  int currentIndex = 1;
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: CustomAppbar(
@@ -62,12 +60,12 @@ class _PropertiesState extends ConsumerState<Properties> {
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       List<String> images = [
-                        LandAssets.product1,
-                        LandAssets.product2,
-                        LandAssets.product3,
-                        LandAssets.product4,
-                        LandAssets.product5,
-                        LandAssets.product6,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
                       ];
                       List<String> sellingPrice = [
                         '₦2,000,000',
@@ -140,12 +138,12 @@ class _PropertiesState extends ConsumerState<Properties> {
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       List<String> images = [
-                        LandAssets.product1,
-                        LandAssets.product2,
-                        LandAssets.product3,
-                        LandAssets.product4,
-                        LandAssets.product5,
-                        LandAssets.product6,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
+                        LandAssets.defaultImage,
                       ];
 
                       List<String> cost = [

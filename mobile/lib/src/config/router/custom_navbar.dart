@@ -1,6 +1,6 @@
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
 class CustomBottomNav extends StatefulWidget {
   const CustomBottomNav({
@@ -312,51 +312,3 @@ class _CustomBottomNavState extends State<CustomBottomNav> {
         ],
       );
 }
-
-// class CirclePath extends CustomClipper<Path> {
-//   @override
-//   Path getClip(Size size) {
-//     var path = Path();
-//     double length = 32; //Adjust this 32 for the deep sink
-//     double offset = 15; //Adjust this 50 for the border
-//     double height = size.height * 0.32;
-//     double circleWidth = 50;
-
-//     path.moveTo(0, height);
-//     path.lineTo(0, size.height);
-//     path.lineTo(size.width, size.height);
-//     path.lineTo(size.width, height + offset);
-//     path.quadraticBezierTo(
-//       size.width,
-//       height,
-//       size.width - offset,
-//       height,
-//     );
-//     path.lineTo(size.width / 2 + circleWidth, height);
-//     path.quadraticBezierTo(
-//       size.width / 2 + circleWidth,
-//       0,
-//       size.width / 2,
-//       0,
-//     );
-//     path.quadraticBezierTo(
-//       size.width / 2 - circleWidth,
-//       0,
-//       size.width / 2 - circleWidth,
-//       height,
-//     );
-//     path.lineTo(size.width / 2 - circleWidth, height);
-//     path.lineTo(offset, height);
-//     path.quadraticBezierTo(
-//       0,
-//       height,
-//       0,
-//       height + offset,
-//     );
-//     // path.close();
-//     return path;
-//   }
-
-//   @override
-//   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
-// }

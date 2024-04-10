@@ -1,7 +1,9 @@
 import 'package:intl/intl.dart';
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
 
-import 'package:landvest/src/features/home/model/model.dart';
+import 'package:landvext/src/features/home/model/model.dart';
+import 'package:landvext/src/features/home/widget/amount_text.dart';
+import 'package:landvext/src/features/home/widget/transaction_id.dart';
 
 class HistoryMore extends StatefulWidget {
   const HistoryMore({required this.transactionModel, super.key});
@@ -40,262 +42,69 @@ class _HistoryMoreState extends State<HistoryMore> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             40.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Amount:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  NumberFormat.currency(
-                    symbol: '₦',
-                    decimalDigits: 2,
-                  ).format(widget.transactionModel.amount),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Amount:',
+              text2: NumberFormat.currency(
+                symbol: '₦',
+                decimalDigits: 2,
+              ).format(widget.transactionModel.amount),
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Date:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  formattedDate,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Date:',
+              text2: formattedDate,
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Time:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  formattedTime,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Time:',
+              text2: formattedTime,
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Transaction ID:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                FittedBox(
-                  child: Text(
-                    widget.transactionModel.externalTransactionId
-                        .toString()
-                        .padLeft(25)
-                        .substring(17),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: LandColors.textColorVeryBlack,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.28,
-                    ),
-                    maxLines: 2,
-                  ),
-                ),
-              ],
+            TransactionID(
+              text: widget.transactionModel.externalTransactionId
+                  .toString()
+                  .padLeft(25)
+                  .substring(17),
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Description:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.transactionModel.transactionType == 'CREDIT'
-                      ? 'Credit to ${widget.transactionModel.destination}'
-                      : 'Debit to ${widget.transactionModel.destination}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Description:',
+              text2: widget.transactionModel.transactionType == 'CREDIT'
+                  ? 'Credit to ${widget.transactionModel.destination}'
+                  : 'Debit to ${widget.transactionModel.destination}',
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Destination:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.transactionModel.destination,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Destination:',
+              text2: widget.transactionModel.destination,
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Status:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.transactionModel.transactionType == 'CREDIT'
-                      ? 'Credit'
-                      : 'Debit',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: widget.transactionModel.transactionType == 'CREDIT'
-                        ? LandColors.green
-                        : LandColors.redActive,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Status:',
+              text2: widget.transactionModel.transactionType == 'CREDIT'
+                  ? 'Credit'
+                  : 'Debit',
+              color: widget.transactionModel.transactionType == 'CREDIT'
+                  ? LandColors.green
+                  : LandColors.redActive,
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Bank:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.transactionModel.source,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Bank:',
+              text2: widget.transactionModel.source,
             ),
             12.verticalSpace,
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Balance on transaction:',
-                  style: TextStyle(
-                    color: LandColors.textColorNewGrey,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    height: 0,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  widget.transactionModel.balanceOnTransaction.toString(),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: LandColors.textColorVeryBlack,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: -0.28,
-                  ),
-                ),
-              ],
+            Amount(
+              widget: widget,
+              text: 'Balance on transaction:',
+              text2: widget.transactionModel.balanceOnTransaction.toString(),
             ),
             24.verticalSpace,
           ],

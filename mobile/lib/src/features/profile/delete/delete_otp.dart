@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/delete_user.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class DeleteOtp extends StatefulWidget {
@@ -68,7 +69,7 @@ class _DeleteOtpState extends State<DeleteOtp> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.deleteUser(
+    await PostRequestDeleteUser.deleteUser(
       context,
       otp: textEditingController.text,
     );

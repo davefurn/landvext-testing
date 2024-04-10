@@ -1,4 +1,5 @@
-import 'package:landvest/src/core/constants/imports.dart';
+import 'package:landvext/src/core/constants/imports.dart';
+import 'package:landvext/src/core/services/postRequests/requests/send_feedback.dart';
 
 class FeedBacks extends StatefulWidget {
   const FeedBacks({super.key});
@@ -25,7 +26,7 @@ class _FeedBacksState extends State<FeedBacks> {
     setState(() {
       state = LoadingState.loading;
     });
-    await PostRequest.sendFeedback(
+    await PostRequestSendFeedback.sendFeedback(
       context,
       title: textEditingController.text.trim(),
       message: textEditingController2.text.trim(),
